@@ -9,20 +9,32 @@ import { TikTokSection } from "@/components/home/TikTokSection";
 
 export const revalidate = 60;
 
+function fetchFeaturedBikes() {
+  return prisma.motorcycle.findMany({
+    where: { status: "AVAILABLE" },
+    include: { images: { orderBy: { order: "asc" } } },
+    orderBy: { createdAt: "desc" },
+    take: 6,
+  });
+}
+
+function fetchArticles() {
+  return prisma.article.findMany({
+    where: { published: true },
+    orderBy: { createdAt: "desc" },
+    take: 3,
+  });
+}
+
 export default async function HomePage() {
-  const [bikes, articles] = await Promise.all([
-    prisma.motorcycle.findMany({
-      where: { status: "AVAILABLE" },
-      include: { images: { orderBy: { order: "asc" } } },
-      orderBy: { createdAt: "desc" },
-      take: 6,
-    }),
-    prisma.article.findMany({
-      where: { published: true },
-      orderBy: { createdAt: "desc" },
-      take: 3,
-    }),
-  ]);
+  let bikes: Awaited<ReturnType<typeof fetchFeaturedBikes>> = [];
+  let articles: Awaited<ReturnType<typeof fetchArticles>> = [];
+  try {
+    [bikes, articles] = await Promise.all([fetchFeaturedBikes(), fetchArticles()]);
+  } catch {
+    // Database not reachable yet (e.g. first deploy before DB is connected) —
+    // render the page with empty sections instead of crashing.
+  }
 
   return (
     <>

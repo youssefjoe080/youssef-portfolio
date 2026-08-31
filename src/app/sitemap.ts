@@ -5,8 +5,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   const [bikes, articles] = await Promise.all([
-    prisma.motorcycle.findMany({ where: { status: { in: ["AVAILABLE", "RESERVED"] } }, select: { slug: true, updatedAt: true } }),
-    prisma.article.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }),
+    prisma.motorcycle
+      .findMany({ where: { status: { in: ["AVAILABLE", "RESERVED"] } }, select: { slug: true, updatedAt: true } })
+      .catch(() => []),
+    prisma.article.findMany({ where: { published: true }, select: { slug: true, updatedAt: true } }).catch(() => []),
   ]);
 
   return [

@@ -57,15 +57,28 @@ export default async function BikesPage({ searchParams }: { searchParams: Promis
     ];
   }
 
-  const [bikes, brandRows, locationRows] = await Promise.all([
-    prisma.motorcycle.findMany({
+  function fetchBikes() {
+    return prisma.motorcycle.findMany({
       where,
       include: { images: { orderBy: { order: "asc" } } },
       orderBy: { createdAt: "desc" },
-    }),
-    prisma.motorcycle.findMany({ where: { status: { not: "HIDDEN" } }, select: { brand: true }, distinct: ["brand"] }),
-    prisma.motorcycle.findMany({ where: { status: { not: "HIDDEN" } }, select: { location: true }, distinct: ["location"] }),
-  ]);
+    });
+  }
+  function fetchBrands() {
+    return prisma.motorcycle.findMany({ where: { status: { not: "HIDDEN" } }, select: { brand: true }, distinct: ["brand"] });
+  }
+  function fetchLocations() {
+    return prisma.motorcycle.findMany({ where: { status: { not: "HIDDEN" } }, select: { location: true }, distinct: ["location"] });
+  }
+
+  let bikes: Awaited<ReturnType<typeof fetchBikes>> = [];
+  let brandRows: Awaited<ReturnType<typeof fetchBrands>> = [];
+  let locationRows: Awaited<ReturnType<typeof fetchLocations>> = [];
+  try {
+    [bikes, brandRows, locationRows] = await Promise.all([fetchBikes(), fetchBrands(), fetchLocations()]);
+  } catch {
+    // Database not reachable yet — show the empty state instead of crashing.
+  }
 
   const brands = brandRows.map((b) => b.brand).sort((a, b) => a.localeCompare(b));
   const locations = locationRows.map((l) => l.location).sort((a, b) => a.localeCompare(b));

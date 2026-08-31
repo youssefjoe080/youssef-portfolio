@@ -12,10 +12,12 @@ export const metadata: Metadata = {
 export const revalidate = 300;
 
 export default async function GuidePage() {
-  const articles = await prisma.article.findMany({
-    where: { published: true },
-    orderBy: { createdAt: "desc" },
-  });
+  const articles = await prisma.article
+    .findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+    })
+    .catch(() => []);
 
   return (
     <div className="container-app py-10 md:py-14">
