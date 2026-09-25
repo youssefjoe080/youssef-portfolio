@@ -111,7 +111,7 @@ const BIKES = [
   { code: 73, brand: "Kawasaki", model: "Ninja ZX-10R", year: 2015, type: "sport", cc: 1000, km: "18,000", location: "—", license: "Clean title", price: 690, status: "available",
     features: ["Hotbodies MGP Growler exhaust + link pipe", "Dynojet Power Commander V + Autotune", "K&N high-flow air filter", "Puig dark smoke windshield", "Carbon fiber seats", "Engine guard + axle sliders", "Michelin Power GP2", "All services done"] },
 
-  { code: 75, brand: "Kawasaki", model: "Z1000", year: 2013, type: "naked", cc: 1000, km: "32,000", location: "المرج", license: "3 سنين — مرور مدينة نصر", price: 470, status: "available",
+  { code: 75, brand: "Kawasaki", model: "Ninja 1000 (Z1000SX)", year: 2013, type: "sport", cc: 1000, km: "32,000", location: "المرج", license: "3 سنين — مرور مدينة نصر", price: 470, status: "available",
     features: ["فابريكا بالكامل", "وش الزيت فقط + ورق دبرياج جديد", "كل السيرفس معمول"] },
 
   { code: 79, brand: "Honda", model: "Hornet 600", year: 2008, type: "naked", cc: 600, km: "42,000", location: "المنصورة", license: "إفراج 2026", price: 315, status: "available",
