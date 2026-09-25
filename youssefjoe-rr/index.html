@@ -420,6 +420,15 @@
         </div>
         <form class="form" id="matchForm">
           <div class="row">
+            <label>اسمك
+              <input name="name" required maxlength="60" autocomplete="name" placeholder="مثال: أحمد محمد" />
+            </label>
+            <label>رقم موبايلك
+              <input name="phone" required type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="01xxxxxxxxx" dir="ltr" style="text-align:right" />
+            </label>
+          </div>
+          <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);opacity:0;border:0;padding:0" />
+          <div class="row">
             <label>النوع
               <select name="type">
                 <option>أي نوع</option>
@@ -782,7 +791,13 @@
       $("#matchForm").addEventListener("submit", (e) => {
         e.preventDefault();
         const f = new FormData(e.target);
-        const msg = `السلام عليكم، دوّرلي على بايك:\nالنوع: ${f.get("type")}\nالميزانية: ${f.get("budget")}\nالاستخدام: ${f.get("use")}\nالمحافظة: ${f.get("city") || "—"}\nموديل معيّن: ${f.get("model") || "—"}`;
+        const phone = String(f.get("phone") || "").replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[^\d+]/g, "");
+        if (!/^(\+?20)?0?1[0125]\d{8}$/.test(phone)) { toast("اكتب رقم موبايل صحيح"); e.target.phone.focus(); return; }
+        const lead = Object.fromEntries(f.entries());
+        lead.phone = phone;
+        // save to Notion in the background — WhatsApp opens right away either way
+        try { fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(lead), keepalive: true }).catch(() => {}); } catch (err) { /* ignore */ }
+        const msg = `السلام عليكم، أنا ${f.get("name")}، دوّرلي على بايك:\nالنوع: ${f.get("type")}\nالميزانية: ${f.get("budget")}\nالاستخدام: ${f.get("use")}\nالمحافظة: ${f.get("city") || "—"}\nموديل معيّن: ${f.get("model") || "—"}`;
         window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
       });
 
