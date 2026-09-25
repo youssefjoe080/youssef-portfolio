@@ -32,7 +32,7 @@ const BIKES = [
   { code: 22, brand: "Honda", model: "CBR 600 F4i", year: 2002, type: "sport", cc: 600, km: "—", location: "6 أكتوبر", license: "أول رخصة من الإفراج", price: 235, status: "available",
     features: ["ستوك بالكامل بحالة المصنع", "الموتور ما اتحلش غير وش الكهربا للصيانة", "بطارية + رادياتير + مياه جديدة", "لمبات LED", "علبة تعديل: هادية على الـLow وصوت رعد على الـHigh RPM", "متسرفز بالكامل — مش محتاج مصاريف"] },
 
-  { code: 24, brand: "Honda", model: "Steed 400", year: 1995, type: "cruiser", cc: 400, km: "—", location: "سوهاج", license: "منتهية — مرور الجيزة", price: 53, status: "reserved",
+  { code: 24, brand: "Honda", model: "Steed 400", year: 1995, type: "cruiser", cc: 400, km: "—", location: "سوهاج", license: "منتهية — مرور الجيزة", price: 53, status: "available",
     features: ["محتاج عمرة", "لقطة للي فاهم وعايز يعملها على نضافة"] },
 
   { code: 26, brand: "Suzuki", model: "Burgman 650", year: 2006, type: "scooter", cc: 650, km: "—", location: "السويس", license: "هتتجدد سنة للمشتري", price: 190, status: "available",
