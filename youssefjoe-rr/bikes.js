@@ -71,8 +71,6 @@ const BIKES = [
   { code: 47, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "60,000", location: "بنها", license: "حتى آخر 2027 — مرور المنوفية", price: 160, status: "available",
     features: ["طنابير أمامي تعديل", "علبة SC Project", "كلبرات فرامل تعديل", "كاوتش أمامي 80% / خلفي 70%", "رش ديل + ملحوظة بسيطة في التنك"] },
 
-  { code: 52, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "—", location: "فيصل", license: "رخصة 3 سنين", price: 190, status: "available",
-    features: ["الموتور ما اتحلش نهائي (ولا وش)", "سيرفس كامل: زيت + فلاتر + دورة مياه + بوجيهات", "آلات جر جديدة + تنظيف كربراتير", "شكمان وجادون ستوك وتعديل"] },
 
   { code: 53, brand: "BMW", model: "S1000R", year: null, type: "naked", cc: 1000, km: "32,000", location: "—", license: "رخصة 3 سنين", price: 520, status: "available",
     features: ["صيانات توكيل", "فابريكا بالكامل", "كل الصيانات معمولة", "مش محتاج جنيه مصروف"] },
@@ -137,4 +135,10 @@ const BIKES = [
 
   { code: 90, brand: "Honda", model: "Hornet 600", year: 2006, type: "naked", cc: 600, km: "65,000", location: "حدائق حلوان", license: "سنتين — مرور المعادي", price: 195, status: "available",
     features: ["وش واحد فقط — الموتور ما اتحلش", "مرايات + جادون + شكمان تعديل", "مقبض وسلايدرات تعديل", "رش نضافة", "مش محتاجة أي مصاريف"] },
+
+  { code: 91, brand: "Suzuki", model: "GSR 600 (بيبي كينج)", year: 2007, type: "naked", cc: 600, km: "50,000", location: "شبين القناطر", license: "رخصة سنتين — مرور حدائق الأهرام", price: 205, status: "available",
+    features: ["وشوش الصيانة فقط", "فردتين كاوتش جداد (95%)", "آلات جر 90%", "راشة كلها ما عدا التانك (تغيير لون) — كل الأجزاء سليمة", "متاح للبدل"] },
+
+  { code: 92, brand: "Honda", model: "Hornet 600", year: 2007, type: "naked", cc: 600, km: "73,000", location: "السويس", license: "رخصة سنة — مرور السويس", price: 240, status: "available",
+    features: ["الموتور سليم ما اتحلش أي حاجة", "فردة قدام جديدة", "كل الصيانات معمولة (زيت وفلتر)", "علبة SC Project + العلبة الأصلية موجودة", "ديل ومقابض تعديل", "راشة"] },
 ];
