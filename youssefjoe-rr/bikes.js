@@ -77,8 +77,6 @@ const BIKES = [
   { code: 53, brand: "BMW", model: "S1000R", year: null, type: "naked", cc: 1000, km: "32,000", location: "—", license: "رخصة 3 سنين", price: 520, status: "available",
     features: ["صيانات توكيل", "فابريكا بالكامل", "كل الصيانات معمولة", "مش محتاج جنيه مصروف"] },
 
-  { code: 54, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "—", location: "الفيوم", license: "سنة ونص — مرور الجيزة", price: 135, status: "available",
-    features: ["مش راشة أي حاجة", "حالل 4 شمايز فقط", "إسكرينة حماية", "مش محتاجة جنيه مصروف"] },
 
   { code: 55, brand: "Honda", model: "Hornet 600", year: 2008, type: "naked", cc: 600, km: "—", location: "سوهاج", license: "منتهية — مرور الإسكندرية", price: 225, status: "available",
     features: ["وش زيت فقط + كارتيرة سفلية جديدة", "جنزير وأتيال جديد", "تنظيف إنجكشن + رشاشات جديدة", "بوجيهات + دورة مياه + بلي جنط", "شكمان وفلتر هوا تعديل + لمبة زينون", "سلايدرات + سكن", "إمكانية التوصيل للمشتري الجاد"] },
