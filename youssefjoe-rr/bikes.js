@@ -38,7 +38,7 @@ const BIKES = [
   { code: 26, brand: "Suzuki", model: "Burgman 650", year: 2006, type: "scooter", cc: 650, km: "—", location: "السويس", license: "هتتجدد سنة للمشتري", price: 190, status: "available",
     features: ["الموتور ما اتحلش", "مش محتاج جنيه مصاريف", "فردة قدام جديدة", "سيستم شكمان تعديل", "مرايات ضم"] },
 
-  { code: 28, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "—", location: "المنصورة", license: "3 سنين إلا 3 شهور", price: 215, status: "available",
+  { code: 28, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "53,700", location: "المنصورة", license: "3 سنين إلا 3 شهور", price: 215, status: "available",
     features: ["الموتور ما اتحلش", "رش بسيط في التنك متعمول كويس"] },
 
   { code: 29, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "—", location: "الفيوم", license: "3 سنين — مرور المنوفية", price: 200, status: "available",
