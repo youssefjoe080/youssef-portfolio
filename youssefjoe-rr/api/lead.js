@@ -17,12 +17,17 @@ module.exports = async (req, res) => {
   const phone = String(b.phone || "").replace(/[^\d+]/g, "");
   if (!name || !/^(\+?20)?0?1[0125]\d{8}$/.test(phone)) return res.status(400).json({ ok: false, error: "invalid" });
 
+  const line = (label, v) => (v ? `${label}: ${String(v).slice(0, 200)}` : null);
   const notes = [
-    `النوع: ${b.type || "—"}`,
-    `الميزانية: ${b.budget || "—"}`,
-    `الاستخدام: ${b.use || "—"}`,
-    `المحافظة: ${b.city || "—"}`,
-  ].join("\n");
+    line("من", b.source),
+    line("النوع", b.type || "—"),
+    line("الميزانية", b.budget || "—"),
+    line("الخبرة", b.experience),
+    line("الاستخدام", b.use || "—"),
+    line("المحافظة", b.city || "—"),
+    line("محتاج", b.needs),
+    line("اترشحله", b.picks),
+  ].filter(Boolean).join("\n");
 
   const r = await fetch("https://api.notion.com/v1/pages", {
     method: "POST",
@@ -38,7 +43,7 @@ module.exports = async (req, res) => {
         "موبايل": { phone_number: phone },
         "القسم": text("عميل محتمل"),
         "الحالة": { select: { name: "جديد" } },
-        "المصدر": text("الموقع"),
+        "المصدر": text(b.source ? `الموقع — ${String(b.source).slice(0, 40)}` : "الموقع"),
         "الموتوسيكل/الموديل": text(b.model || `${b.type || ""} — ${b.budget || ""}`),
         "ملاحظات": text(notes),
       },
