@@ -128,7 +128,7 @@ const BIKES = [
     features: ["فابريكا — ما اتحلش ولا وش", "3,000 كم بس في مصر", "كاوتش أمامي 100% / خلفي 75%", "راك + مقبض تانك + سلايدرات تعديل", "رفرف خلفي + علبة جنزير + إسكرينة"] },
 
   { code: 87, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "—", location: "الفيوم", license: "سنتين — مرور البحيرة", price: 135, status: "available",
-    features: ["ما اتحلش حاجة خالص", "مش راشة أي حاجة"] },
+    features: ["حالل موتور", "مش راشة أي حاجة"] },
 
   { code: 89, brand: "Honda", model: "CBR 600 F4i Sport", year: 2001, type: "sport", cc: 600, km: "38,000", location: "الإسكندرية", license: "إفراج", price: 290, status: "available",
     features: ["جنبين وتانك ورفرف فابريكا", "فلتر K&N أوريجنال", "كاربون فايبر", "لمض LED", "آلات جر جديدة"] },

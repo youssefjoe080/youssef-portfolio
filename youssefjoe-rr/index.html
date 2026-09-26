@@ -284,8 +284,23 @@
     }
     @keyframes pop { from { opacity: 0; transform: translateY(16px) scale(.98); } }
     .gallery { background: #0c0c0f; position: relative; }
-    .gallery .main { aspect-ratio: 4 / 3; }
-    .gallery .main img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery .main { aspect-ratio: 4 / 3; position: relative; }
+    .track { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; overscroll-behavior-x: contain; }
+    .track::-webkit-scrollbar { display: none; }
+    .slide { flex: 0 0 100%; height: 100%; scroll-snap-align: center; scroll-snap-stop: always; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .g-count { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.65); color: #fff; font-size: .8rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; direction: ltr; pointer-events: none; }
+    .g-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(0,0,0,.55); color: #fff; font-size: 1.4rem; line-height: 1; display: grid; place-items: center; }
+    .g-nav:hover { background: rgba(0,0,0,.8); }
+    .g-prev { left: 10px; } .g-next { right: 10px; }
+    .modal-back {
+      position: fixed; top: 14px; right: 14px; z-index: 110; display: none; align-items: center; gap: 6px;
+      padding: 9px 16px 9px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18);
+      background: rgba(10,10,12,.78); backdrop-filter: blur(10px); color: #fff; font: inherit; font-weight: 800; font-size: .95rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    }
+    .modal.open ~ .modal-back { display: inline-flex; }
+    .modal-back span { font-size: 1.2rem; line-height: 1; }
     .thumbs { display: flex; gap: 8px; padding: 10px; overflow-x: auto; }
     .thumbs img { width: 72px; height: 54px; object-fit: cover; border-radius: 8px; opacity: .55; cursor: pointer; border: 2px solid transparent; }
     .thumbs img.active { opacity: 1; border-color: var(--accent); }
@@ -672,6 +687,7 @@
       <div class="modal-info" id="mInfo"></div>
     </div>
   </div>
+  <button class="modal-back" id="modalBack" aria-label="رجوع"><span>→</span> رجوع</button>
   <div class="toast" id="toast"></div>
 
   <script src="bikes.js"></script>
@@ -790,22 +806,39 @@
     }
 
     // ---------- modal ----------
-    function openBike(code) {
+    function openBike(code, push = true) {
       const b = bikes.find((x) => x.code === +code);
       if (!b) return;
       const main = $("#mMain"), thumbs = $("#mThumbs");
-      main.innerHTML = ""; thumbs.innerHTML = "";
-      const show = (src) => { main.innerHTML = `<img src="${src}" alt="${title(b)}">`; thumbs.querySelectorAll("img").forEach((t) => t.classList.toggle("active", t.src === src)); };
-      let found = 0;
+      thumbs.innerHTML = "";
+      main.innerHTML = `<div class="track" dir="ltr"></div><button class="g-nav g-prev" aria-label="الصورة اللي قبلها">‹</button><button class="g-nav g-next" aria-label="الصورة اللي بعدها">›</button><span class="g-count"></span>`;
+      const track = main.querySelector(".track"), count = main.querySelector(".g-count");
+      const prev = main.querySelector(".g-prev"), next = main.querySelector(".g-next");
+      const slides = () => [...track.children];
+      const idx = () => Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+      const go = (n) => { const k = Math.max(0, Math.min(slides().length - 1, n)); track.scrollTo({ left: k * track.clientWidth, behavior: "smooth" }); };
+      const sync = () => {
+        const n = slides().length, k = Math.min(idx(), n - 1);
+        count.textContent = n > 1 ? `${k + 1} / ${n}` : "";
+        [prev, next, count].forEach((el) => el.style.display = n > 1 ? "" : "none");
+        thumbs.style.display = n > 1 ? "" : "none";
+        [...thumbs.children].forEach((t, i) => t.classList.toggle("active", i === k));
+      };
+      prev.onclick = () => go(idx() - 1);
+      next.onclick = () => go(idx() + 1);
+      let raf; track.addEventListener("scroll", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(sync); });
+      let loaded = 0, pending = MAX_PHOTOS;
+      const done = () => { if (--pending === 0 && loaded === 0) main.innerHTML = placeholder(b); };
       for (let i = 1; i <= MAX_PHOTOS; i++) {
-        const t = imgWithFallback(b, i, (img) => img.remove());
-        t.loading = "eager";
-        t.addEventListener("load", () => { found++; if (!main.querySelector("img")) show(t.src); if (found > 1) thumbs.style.display = ""; });
-        t.addEventListener("click", () => show(t.src));
-        thumbs.appendChild(t);
+        const slide = document.createElement("div"); slide.className = "slide";
+        const thumb = document.createElement("img"); thumb.alt = ""; thumb.style.display = "none";
+        const img = imgWithFallback(b, i, () => { slide.remove(); thumb.remove(); sync(); done(); });
+        img.loading = "eager";
+        img.addEventListener("load", () => { loaded++; thumb.src = img.src; thumb.style.display = ""; sync(); done(); });
+        thumb.addEventListener("click", () => go([...thumbs.children].indexOf(thumb)));
+        slide.appendChild(img); track.appendChild(slide); thumbs.appendChild(thumb);
       }
-      thumbs.style.display = "none";
-      main.innerHTML = placeholder(b);
+      sync();
 
       const msg = `السلام عليكم، عايز أستفسر عن بايك كود ${b.code} — ${title(b)} ${b.year || ""}`;
       $("#mInfo").innerHTML = `
@@ -833,12 +866,22 @@
       $("#modal").classList.add("open");
       $("#modal").setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
-      if (location.hash !== `#bike-${b.code}`) history.replaceState(null, "", `#bike-${b.code}`);
+      $("#modal").scrollTop = 0;
+      if (location.hash !== `#bike-${b.code}`) {
+        // push a history entry so the phone's back button closes the bike instead of leaving the site
+        if (push) history.pushState({ bike: b.code }, "", `#bike-${b.code}`);
+        else history.replaceState(null, "", `#bike-${b.code}`);
+      }
     }
-    function closeBike() {
+    function hideBike() {
       $("#modal").classList.remove("open");
       $("#modal").setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
+    }
+    function closeBike() {
+      if (!$("#modal").classList.contains("open")) return;
+      if (history.state && history.state.bike) { history.back(); return; } // popstate hides it
+      hideBike();
       if (location.hash.startsWith("#bike-")) history.replaceState(null, "", location.pathname + location.search);
     }
     async function shareBike(b) {
@@ -903,11 +946,15 @@
 
       $("#modal").addEventListener("click", (e) => { if (e.target.id === "modal") closeBike(); });
       document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeBike(); });
-      window.addEventListener("hashchange", () => { const m = location.hash.match(/^#bike-(\d+)/); if (m) openBike(m[1]); });
+      window.addEventListener("popstate", () => {
+        const m = location.hash.match(/^#bike-(\d+)/);
+        if (m) openBike(m[1], false); else hideBike();
+      });
+      $("#modalBack").onclick = closeBike;
 
       render();
       const m = location.hash.match(/^#bike-(\d+)/);
-      if (m) openBike(m[1]);
+      if (m) openBike(m[1], false);
     }
     init();
   </script>
