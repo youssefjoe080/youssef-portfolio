@@ -18,13 +18,12 @@
   const regionOf = (loc) => Object.keys(REGIONS).find((k) => REGIONS[k].words.some((w) => String(loc).includes(w))) || null;
 
   const STEPS = [
-    { key: "budget", q: "ميزانيتك قد إيه؟", sub: "الأسعار على الموقع قابلة للتفاوض", opts: [
-      { v: "0-150", t: "لحد 150 ألف" }, { v: "150-250", t: "150 — 250 ألف" }, { v: "250-400", t: "250 — 400 ألف" },
-      { v: "400-600", t: "400 — 600 ألف" }, { v: "600-2000", t: "فوق 600 ألف" } ] },
+    { key: "budget", type: "range", q: "ميزانيتك قد إيه؟", sub: "اسحب وحدد أقصى مبلغ تقدر تدفعه — الأسعار قابلة للتفاوض",
+      min: 50, max: 800, step: 5, def: 250, quick: [150, 200, 250, 300, 400, 600] },
     { key: "exp", q: "خبرتك في السواقة؟", sub: "بصراحة — دي أهم إجابة علشان أمانك", opts: [
       { v: "new", t: "أول بايك ليا", d: "لسه هبدأ أو سايق قليل" }, { v: "mid", t: "سايق قبل كده", d: "سنة أو اتنين على بايك" },
       { v: "pro", t: "سواق متمرس", d: "سقت 600 أو أكبر كتير" } ] },
-    { key: "use", q: "هتستخدمه في إيه أكتر؟", opts: [
+    { key: "use", q: "هتستخدمه في إيه؟", sub: "اختار كل اللي ينطبق عليك", multi: true, required: true, opts: [
       { v: "city", t: "مشاوير يومية", d: "شغل وجامعة وزحمة" }, { v: "fun", t: "خروجات وتقفيل", d: "آخر الأسبوع مع الصحاب" },
       { v: "travel", t: "سفر ومسافات طويلة", d: "طرق سريعة وراحة" }, { v: "track", t: "سرعة وتراك", d: "أداء عالي" } ] },
     { key: "cat", q: "شكل البايك اللي بتحبه؟", opts: [
@@ -58,7 +57,7 @@
 
   // ---------- scoring ----------
   function score(b, a) {
-    const [lo, hi] = a.budget.split("-").map(Number);
+    const hi = a.budget >= 800 ? 2000 : a.budget, lo = Math.round(hi * 0.7);
     if (b.status === "sold") return null;
     if (b.price > hi * 1.1) return null;                       // خارج الميزانية
     if (a.exp === "new" && b.cc >= 1000 && b.type === "sport") return null; // مش هنرشح سوبر سبورت لمبتدئ
@@ -66,7 +65,7 @@
     let s = 50; const why = []; const warn = [];
     if (b.price > hi) { s -= 6; warn.push(`أعلى من ميزانيتك بـ ${b.price - hi} ألف — بس السعر قابل للتفاوض`); }
     else if (b.price >= lo) { s += 12; why.push("في حدود ميزانيتك بالظبط"); }
-    else if (b.price >= lo * 0.7 || a.exp === "new") { s += 6; why.push(`أقل من ميزانيتك — هيفضلك ${lo - b.price}+ ألف للصيانة والعدة`); }
+    else if (b.price >= hi * 0.45 || a.exp === "new") { s += 6; why.push(`أقل من ميزانيتك — هيفضلك ${hi - b.price} ألف للصيانة والعدة`); }
     else s -= 4;
 
     // موديل أحدث وعداد أقل = نقطة زيادة بسيطة (بتفرّق بين البايكات المتشابهة)
@@ -88,24 +87,30 @@
       else if (mid && b.type === "sport") s += 8;
     }
 
-    const u = a.use;
-    if (u === "city") {
-      if (b.type === "scooter") { s += 14; why.push("أوتوماتيك ومريح في الزحمة"); }
-      else if (b.type === "naked") { s += 10; why.push("نيكد — مريح في المشاوير اليومية والزحمة"); }
-      else if (b.type === "sport" && big) s -= 12;
-      else if (b.type === "sport") s -= 4;
-    } else if (u === "fun") {
-      if (b.type === "naked" || b.type === "sport") { s += 8; why.push("ممتع في الخروجات والتقفيل"); }
-    } else if (u === "travel") {
-      if (/Hayabusa|Z1000SX|Burgman|GSX-S1000|CB650R/i.test(b.model)) { s += 16; why.push("مريح في السفر والطرق السريعة"); }
-      else if (b.cc >= 650) { s += 8; why.push("قوة كفاية للطرق السريعة"); }
-      else if (b.cc <= 400) s -= 14;
-    } else if (u === "track") {
-      if (b.type === "sport") { s += 16; why.push("سبورت — مصمم للأداء والسرعة"); }
-      else if (b.type === "scooter" || b.type === "cruiser") s -= 30;
-      else s -= 4;
-      if ((b.year || 0) >= 2008) s += 4;
-    }
+    const uses = a.use && a.use.length ? a.use : ["fun"];
+    let useSum = 0;
+    uses.forEach((u) => {
+      let d = 0, w = null;
+      if (u === "city") {
+        if (b.type === "scooter") { d = 14; w = "أوتوماتيك ومريح في الزحمة"; }
+        else if (b.type === "naked") { d = 10; w = "نيكد — مريح في المشاوير اليومية والزحمة"; }
+        else if (b.type === "sport" && big) d = -12;
+        else if (b.type === "sport") d = -4;
+      } else if (u === "fun") {
+        if (b.type === "naked" || b.type === "sport") { d = 8; w = "ممتع في الخروجات والرايدات"; }
+      } else if (u === "travel") {
+        if (/Hayabusa|Z1000SX|Burgman|GSX-S1000|CB650R/i.test(b.model)) { d = 16; w = "مريح في السفر والطرق السريعة"; }
+        else if (b.cc >= 650) { d = 8; w = "قوة كفاية للطرق السريعة"; }
+        else if (b.cc <= 400) d = -14;
+      } else if (u === "track") {
+        if (b.type === "sport") { d = 16; w = "سبورت — مصمم للأداء والسرعة"; }
+        else if (b.type === "scooter" || b.type === "cruiser") d = -30;
+        else d = -4;
+        if ((b.year || 0) >= 2008) d += 4;
+      }
+      useSum += d; if (w) why.push(w);
+    });
+    s += Math.round(useSum / uses.length);
 
     if (a.cat !== "any") {
       if (b.type === a.cat) { s += 12; }
@@ -134,12 +139,12 @@
   if (!root) return;
   const body = root.querySelector(".quiz-body");
   const bar = root.querySelector(".quiz-bar i");
-  let step = 0, ans = { needs: [] }, lastResults = [];
+  let step = 0, ans = { needs: [], use: [] }, lastResults = [];
 
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
   function open() {
-    step = 0; ans = { needs: [] };
+    step = 0; ans = { needs: [], use: [] };
     root.classList.add("open"); document.body.style.overflow = "hidden";
     renderStep();
   }
@@ -151,39 +156,68 @@
   function renderStep() {
     const st = STEPS[step];
     bar.style.width = `${(step / STEPS.length) * 100}%`;
-    body.innerHTML = `
+    const isLast = step === STEPS.length - 1;
+    const head = `
       <div class="q-count">سؤال ${step + 1} من ${STEPS.length}</div>
       <h3 class="q-title">${st.q}</h3>
-      ${st.sub ? `<p class="q-sub">${st.sub}</p>` : ""}
-      <div class="q-opts ${st.multi ? "multi" : ""}">
-        ${st.opts.map((o) => `<button class="q-opt ${st.multi && ans.needs.includes(o.v) ? "on" : ""}" data-v="${o.v}">
-          <b>${o.t}</b>${o.d ? `<small>${o.d}</small>` : ""}</button>`).join("")}
-      </div>
-      <div class="q-nav">
-        ${step > 0 ? `<button class="btn btn-ghost q-back">رجوع</button>` : "<span></span>"}
-        ${st.multi ? `<button class="btn btn-primary q-next">${ans.needs.length ? "طلّعلي النتيجة" : "مش فارق — طلّعلي النتيجة"}</button>` : ""}
-      </div>`;
-    body.querySelectorAll(".q-opt").forEach((btn) => btn.onclick = () => {
-      const v = btn.dataset.v;
-      if (st.multi) {
-        ans.needs = ans.needs.includes(v) ? ans.needs.filter((x) => x !== v) : [...ans.needs, v];
-        btn.classList.toggle("on");
-        body.querySelector(".q-next").textContent = ans.needs.length ? "طلّعلي النتيجة" : "مش فارق — طلّعلي النتيجة";
-      } else {
-        ans[st.key] = v;
-        btn.classList.add("on");
-        setTimeout(() => { step++; step < STEPS.length ? renderStep() : showResults(); }, 160);
-      }
-    });
-    const back = body.querySelector(".q-back"); if (back) back.onclick = () => { step--; renderStep(); };
-    const next = body.querySelector(".q-next"); if (next) next.onclick = showResults;
+      ${st.sub ? `<p class="q-sub">${st.sub}</p>` : ""}`;
+    const back = step > 0 ? `<button class="btn btn-ghost q-back">رجوع</button>` : "<span></span>";
+
+    if (st.type === "range") {
+      const v = ans[st.key] || st.def;
+      body.innerHTML = head + `
+        <div class="q-range">
+          <div class="qr-val"><b>${v >= st.max ? st.max + "+" : v}</b> ألف جنيه</div>
+          <input type="range" min="${st.min}" max="${st.max}" step="${st.step}" value="${v}" aria-label="الميزانية" />
+          <div class="qr-ends"><span>${st.min} ألف</span><span>${st.max}+ ألف</span></div>
+          <div class="qr-quick">${st.quick.map((q) => `<button data-q="${q}" class="${q === v ? "on" : ""}">${q}</button>`).join("")}</div>
+        </div>
+        <div class="q-nav">${back}<button class="btn btn-primary q-next">التالي</button></div>`;
+      const input = body.querySelector("input"), out = body.querySelector(".qr-val b");
+      const set = (n) => {
+        ans[st.key] = +n; input.value = n; out.textContent = n >= st.max ? st.max + "+" : n;
+        const pct = ((n - st.min) / (st.max - st.min)) * 100;
+        input.style.setProperty("--p", pct + "%");
+        body.querySelectorAll(".qr-quick button").forEach((b) => b.classList.toggle("on", +b.dataset.q === +n));
+      };
+      set(v);
+      input.oninput = () => set(input.value);
+      body.querySelectorAll(".qr-quick button").forEach((b) => b.onclick = () => set(b.dataset.q));
+      body.querySelector(".q-next").onclick = () => { step++; renderStep(); };
+    } else {
+      const sel = st.multi ? (ans[st.key] = ans[st.key] || []) : null;
+      const nextLabel = () => isLast ? (sel.length ? "طلّعلي النتيجة" : "مش فارق — طلّعلي النتيجة") : "التالي";
+      body.innerHTML = head + `
+        <div class="q-opts ${st.multi ? "multi" : ""}">
+          ${st.opts.map((o) => `<button class="q-opt ${(st.multi ? sel.includes(o.v) : ans[st.key] === o.v) ? "on" : ""}" data-v="${o.v}">
+            <b>${o.t}</b>${o.d ? `<small>${o.d}</small>` : ""}</button>`).join("")}
+        </div>
+        <div class="q-nav">${back}${st.multi ? `<button class="btn btn-primary q-next">${nextLabel()}</button>` : ""}</div>`;
+      const next = body.querySelector(".q-next");
+      const refresh = () => { if (!next) return; next.textContent = nextLabel(); next.dataset.block = st.required && !sel.length ? "1" : ""; next.style.opacity = next.dataset.block ? .45 : 1; };
+      refresh();
+      body.querySelectorAll(".q-opt").forEach((btn) => btn.onclick = () => {
+        const v = btn.dataset.v;
+        if (st.multi) {
+          const i = sel.indexOf(v); i >= 0 ? sel.splice(i, 1) : sel.push(v);
+          btn.classList.toggle("on"); refresh();
+        } else {
+          ans[st.key] = v;
+          body.querySelectorAll(".q-opt").forEach((x) => x.classList.toggle("on", x === btn));
+          setTimeout(() => { step++; step < STEPS.length ? renderStep() : showResults(); }, 160);
+        }
+      });
+      if (next) next.onclick = () => { if (next.dataset.block) return toast("اختار حاجة واحدة على الأقل"); isLast ? showResults() : (step++, renderStep()); };
+    }
+    const bk = body.querySelector(".q-back"); if (bk) bk.onclick = () => { step--; renderStep(); };
     body.scrollTop = 0;
   }
 
   function answersText() {
     const pick = (k) => { const st = STEPS.find((x) => x.key === k); const o = st.opts.find((x) => x.v === ans[k]); return o ? o.t : "—"; };
-    const needs = ans.needs.length ? ans.needs.map((n) => NEED_LABEL[n]).join("، ") : "—";
-    return { budget: pick("budget"), exp: pick("exp"), use: pick("use"), cat: pick("cat"), region: pick("region"), needs };
+    const many = (k) => { const st = STEPS.find((x) => x.key === k); const v = ans[k] || []; return v.length ? v.map((x) => (st.opts.find((o) => o.v === x) || {}).t).join("، ") : "—"; };
+    const budget = ans.budget >= 800 ? "فوق 800 ألف" : `لحد ${ans.budget} ألف`;
+    return { budget, exp: pick("exp"), use: many("use"), cat: pick("cat"), region: pick("region"), needs: many("needs") };
   }
 
   function resultCard(r, i) {
@@ -209,7 +243,7 @@
     lastResults = all;
     const top = all.slice(0, 3);
     const a = answersText();
-    const newbieBig = ans.exp === "new" && ["400-600", "600-2000"].includes(ans.budget);
+    const newbieBig = ans.exp === "new" && ans.budget >= 400;
 
     body.innerHTML = top.length ? `
       <div class="q-count">النتيجة</div>
@@ -255,7 +289,7 @@
       c.querySelector(".r-media").prepend(imgWithFallback(b, 1, (img) => img.replaceWith(Object.assign(document.createElement("div"), { innerHTML: placeholder(b) }).firstElementChild)));
       c.querySelector(".r-view").onclick = () => { close(); openBike(b.code); };
     }); };
-    body.querySelector(".q-restart").onclick = () => { step = 0; ans = { needs: [] }; renderStep(); };
+    body.querySelector(".q-restart").onclick = () => { step = 0; ans = { needs: [], use: [] }; renderStep(); };
     body.querySelector(".r-lead").onsubmit = (e) => submitLead(e, top, a);
     body.scrollTop = 0;
   }
