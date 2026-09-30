@@ -127,8 +127,6 @@ const BIKES = [
   { code: 86, brand: "Honda", model: "Hornet 600", year: 2006, type: "naked", cc: 600, km: "39,000", location: "كرداسة", license: "سنتين — أول توكيل", price: 230, status: "available",
     features: ["فابريكا — ما اتحلش ولا وش", "3,000 كم بس في مصر", "كاوتش أمامي 100% / خلفي 75%", "راك + مقبض تانك + سلايدرات تعديل", "رفرف خلفي + علبة جنزير + إسكرينة"] },
 
-  { code: 87, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "—", location: "الفيوم", license: "سنتين — مرور البحيرة", price: 135, status: "available",
-    features: ["حالل موتور", "مش راشة أي حاجة"] },
 
   { code: 89, brand: "Honda", model: "CBR 600 F4i Sport", year: 2001, type: "sport", cc: 600, km: "38,000", location: "الإسكندرية", license: "إفراج", price: 290, status: "available",
     features: ["جنبين وتانك ورفرف فابريكا", "فلتر K&N أوريجنال", "كاربون فايبر", "لمض LED", "آلات جر جديدة"] },
@@ -136,9 +134,13 @@ const BIKES = [
   { code: 90, brand: "Honda", model: "Hornet 600", year: 2006, type: "naked", cc: 600, km: "65,000", location: "حدائق حلوان", license: "سنتين — مرور المعادي", price: 195, status: "available",
     features: ["حالل جوان وش السلندر فقط", "مرايات + جادون + شكمان تعديل", "مقبض وسلايدرات تعديل", "رش نضافة", "مش محتاجة أي مصاريف"] },
 
-  { code: 91, brand: "Suzuki", model: "GSR 600 (بيبي كينج)", year: 2007, type: "naked", cc: 600, km: "50,000", location: "شبين القناطر", license: "رخصة سنتين — مرور حدائق الأهرام", price: 205, status: "available",
-    features: ["وشوش الصيانة فقط", "فردتين كاوتش جداد (95%)", "آلات جر 90%", "راشة كلها ما عدا التانك (تغيير لون) — كل الأجزاء سليمة", "متاح للبدل"] },
 
   { code: 92, brand: "Honda", model: "Hornet 600", year: 2007, type: "naked", cc: 600, km: "73,000", location: "السويس", license: "رخصة سنة — مرور السويس", price: 240, status: "available",
     features: ["الموتور سليم ما اتحلش أي حاجة", "فردة قدام جديدة", "كل الصيانات معمولة (زيت وفلتر)", "علبة SC Project + العلبة الأصلية موجودة", "ديل ومقابض تعديل", "راشة"] },
+
+  { code: 100, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "—", location: "بنها", license: "منتهية — مرور قنا", price: 125, status: "available",
+    features: ["لسه خارجة من شدّة كاملة — مش محتاجة مصروف", "رادياتير + آلات جر + جنزير جديد", "كاتينة وشداد جديد + وش سلندر", "بوجيهات + سلك بنزين + حنفية جديدة", "مقابض وغطا تانك جديد", "شكمان استوك", "الموتور محلول قبل كده", "راشة"] },
+
+  { code: 101, brand: "Honda", model: "Hornet 600", year: 2005, type: "naked", cc: 600, km: "43,000", location: "—", license: "منتهية من 6 شهور", price: 230, status: "available",
+    features: ["الموتور ما اتحلش", "سيرفس كامل: زيت وفلتر + بوجيهات NGK + دورة مياه", "تعديلات كتير — وكل القطع الاستوك معاها", "رش نضافة"] },
 ];
