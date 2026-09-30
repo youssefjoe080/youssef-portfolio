@@ -143,4 +143,7 @@ const BIKES = [
 
   { code: 101, brand: "Honda", model: "Hornet 600", year: 2005, type: "naked", cc: 600, km: "43,000", location: "—", license: "منتهية من 6 شهور", price: 230, status: "available",
     features: ["الموتور ما اتحلش", "سيرفس كامل: زيت وفلتر + بوجيهات NGK + دورة مياه", "تعديلات كتير — وكل القطع الاستوك معاها", "رش نضافة"] },
+
+  { code: 103, brand: "Suzuki", model: "GSR 600 (بيبي كينج)", year: 2008, type: "naked", cc: 600, km: "54,000", location: "المنصورة", license: "3 سنين — مرور المنصورة", price: 240, status: "available",
+    features: ["الموتور ما اتحلش أي حاجة", "رش الفيبرة اللي تحت الكرسي فقط", "بوكس GIVI + راك", "إسكرينة + سلايدرات + تانك باد", "لسه بالنايلون على الكرسي"] },
 ];
