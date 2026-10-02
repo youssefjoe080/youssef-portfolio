@@ -149,4 +149,7 @@ const BIKES = [
 
   { code: 104, brand: "Honda", model: "VTX 1800 F3", year: 2005, type: "cruiser", cc: 1800, km: "45,000", location: "الشروق / مدينتي", license: "رخصة سنة — مرور الشروق", price: 360, status: "available",
     features: ["الموتور ما اتحلش أي حاجة", "كل الصيانات معمولة", "كرسي تعديل بتسخين وتبريد", "شكمان Cobra", "مقابض ومرايات تعديل", "راشة تغيير لون فقط"] },
+
+  { code: 105, brand: "Honda", model: "Hornet 600", year: 2007, type: "naked", cc: 600, km: "44,400", location: "—", license: "حتى 04/2028 — مرور فيصل", price: 260, status: "available",
+    features: ["الموتور ما اتحلش مسمار", "فابريكا بالكامل", "فردة كاوتش خلفي جديدة + غيار زيت", "إسكرينة تعديل + علبة شكمان تعديل"] },
 ];
