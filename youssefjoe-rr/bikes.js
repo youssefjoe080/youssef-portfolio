@@ -153,6 +153,6 @@ const BIKES = [
   { code: 105, brand: "Honda", model: "Hornet 600", year: 2007, type: "naked", cc: 600, km: "44,400", location: "—", license: "حتى 04/2028 — مرور فيصل", price: 260, status: "available",
     features: ["الموتور ما اتحلش مسمار", "فابريكا بالكامل", "فردة كاوتش خلفي جديدة + غيار زيت", "إسكرينة تعديل + علبة شكمان تعديل"] },
 
-  { code: 106, brand: "Honda", model: "Hornet 600 ABS", year: 2007, type: "naked", cc: 600, km: "75,700", location: "المهندسين", license: "رخصة 3 سنين", price: 340, status: "available",
+  { code: 106, brand: "Honda", model: "Hornet 600 ABS", year: 2007, type: "naked", cc: 600, km: "75,700", location: "المهندسين", license: "رخصة 3 سنين", price: 300, status: "available",
     features: ["فابريكا بالكامل", "أول مالك بعد الإفراج", "فرامل ABS بحالة زيرو + طنابير زيرو", "كاوتش وجنزير بحالة ممتازة", "صيانة كاملة + بوجيهات NGK Laser Iridium", "شكمان تعديل أصلي", "مقابض ومرايات تعديل + حامل موبايل"] },
 ];
