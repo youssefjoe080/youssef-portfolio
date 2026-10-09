@@ -14,7 +14,7 @@ const BIKES = [
   { code: 5, brand: "Honda", model: "CBR 1000RR", year: 2012, type: "sport", cc: 1000, km: "36,000", location: "—", license: "رخصة سنة — أول ترخيص من الإفراج", price: 460, status: "available",
     features: ["الموتور ما اتحلش مسمار", "كل الصيانات معمولة — Fully loaded", "Full exhaust system", "إسكرينة Power Bronze", "شبكة حماية رادياتير Beowulf", "طقم كاوتش إنتاج جديد", "سلايدرات T-REX أمامي وخلفي", "حامل نمرة Yoshimura + النمرة الأمريكي الأصلي", "مساعد خلفي Öhlins", "بامب خلفي Pyramid"] },
 
-  { code: 7, brand: "Honda", model: "CBR 600RR", year: 2012, type: "sport", cc: 600, km: "26,000", location: "القاهرة", license: "سارية حتى 2028 — مرور مدينة نصر", price: 300, status: "available",
+  { code: 7, brand: "Honda", model: "CBR 600RR", year: 2012, type: "sport", cc: 600, km: "26,000", location: "الشرقية", license: "سارية حتى 2028 — مرور مدينة نصر", price: 300, status: "available",
     features: ["الموتور ما اتحلش — اتفتح وش الزيت للصيانة فقط", "الفيبر متغير وفيه كسور (موضح بشفافية)", "المعاينة والفحص بأي فني"] },
 
   { code: 8, brand: "Honda", model: "Hornet 600 Injection", year: 2007, type: "naked", cc: 600, km: "68,000", location: "الشرقية", license: "رخصة 3 سنين — مرور طوخ", price: 210, status: "available",
