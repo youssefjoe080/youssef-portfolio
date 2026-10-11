@@ -44,8 +44,6 @@ const BIKES = [
   { code: 29, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "—", location: "الفيوم", license: "3 سنين — مرور المنوفية", price: 200, status: "available",
     features: ["الموتور ما اتحلش خالص", "العجل زيرو", "رش نضافة برة مصر"] },
 
-  { code: 30, brand: "Honda", model: "Hornet 600", year: 2002, type: "naked", cc: 600, km: "—", location: "فيصل", license: "سارية حتى 04/2027", price: 130, status: "available",
-    features: ["السعر فيه تفاوض", "فابريكا — دوّر وامشي", "رادياتير + طرمبة مياه جديدة", "بوجيهات جديدة + Motul 7100", "ضبط وتنظيف الكربراتير", "شكمان MIVV + الأصلي موجود", "جادون وفلتر هوا تعديل", "إسكرينة + إشارات LED + سلايدرات", "معظم قطع الستوك موجودة", "خبطتين في التانك وخدوش في الديل (موضحة)"] },
 
   { code: 31, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "70,000", location: "الدقهلية", license: "إفراج بورسعيد", price: 200, status: "available",
     features: ["ما اتحلش أي حاجة", "مش راشة", "كتينة وشداد أصلي جديد", "بلاطة شحن جديدة", "سيستم شكمان كامل تعديل"] },
@@ -124,8 +122,8 @@ const BIKES = [
   { code: 85, brand: "Honda", model: "CBR 600RR", year: 2009, type: "sport", cc: 600, km: "51,000", location: "العبور", license: "منتهية — مرور الأميرية", price: 290, status: "available",
     features: ["فيبر ABS", "وشين صيانة فقط", "كل الصيانة معمولة", "كل حاجة في البايك جديدة"] },
 
-  { code: 86, brand: "Honda", model: "Hornet 600", year: 2006, type: "naked", cc: 600, km: "39,000", location: "كرداسة", license: "سنتين — أول توكيل", price: 230, status: "available",
-    features: ["فابريكا — ما اتحلش ولا وش", "3,000 كم بس في مصر", "كاوتش أمامي 100% / خلفي 75%", "راك + مقبض تانك + سلايدرات تعديل", "رفرف خلفي + علبة جنزير + إسكرينة"] },
+  { code: 86, brand: "Honda", model: "Hornet 600", year: 2006, type: "naked", cc: 600, km: "39,000", location: "كرداسة", license: "سنتين — أول توكيل", price: 200, status: "available",
+    features: ["السعر فيه تفاوض", "فابريكا — ما اتحلش ولا وش", "3,000 كم بس في مصر", "كاوتش أمامي 100% / خلفي 75%", "راك + مقبض تانك + سلايدرات تعديل", "رفرف خلفي + علبة جنزير + إسكرينة"] },
 
 
   { code: 89, brand: "Honda", model: "CBR 600 F4i Sport", year: 2001, type: "sport", cc: 600, km: "38,000", location: "الإسكندرية", license: "إفراج", price: 290, status: "available",
