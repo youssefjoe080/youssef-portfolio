@@ -1,8 +1,8 @@
 // ====== قطع الغيار ======
-// كل قطعة: code (كود نوشن) · name · fits (متوافق مع) · price (سعر البيع بالجنيه) · qty · status: "in" | "out" | "order"
+// كل قطعة: code (كود نوشن) · name · fits (متوافق مع) · location (مكان القطعة) · price (سعر البيع بالجنيه) · qty · status: "in" | "out" | "order"
 // الصور: images/parts/{code}-1.jpg ... photos = عدد الصور (لو 0 بيظهر شكل افتراضي)
 const PARTS = [
-  { code: 156, name: "شكمان Baby King أصلي", category: "شكمانات", fits: "", price: 8500, qty: 1, status: "in", photos: 5, notes: "" }
+  { code: 156, name: "شكمان Baby King أصلي", category: "شكمانات", fits: "Suzuki GSR600 (Baby King)", location: "الإسكندرية", price: 8500, qty: 1, status: "in", photos: 5, notes: "" }
 ];
 
 (function () {
@@ -24,7 +24,7 @@ const PARTS = [
   };
   const ICON = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M40 10a12 12 0 0 0-11 16L12 43a5 5 0 0 0 7 7l17-17a12 12 0 0 0 16-11l-7 7-6-2-2-6 7-7a12 12 0 0 0-4-4z"/></svg>`;
 
-  const parts = PARTS.filter((p) => p && p.name).map((p) => ({ ...p, _hay: norm([p.code, p.name, p.category, p.fits].join(" ")) }));
+  const parts = PARTS.filter((p) => p && p.name).map((p) => ({ ...p, _hay: norm([p.code, p.name, p.category, p.fits, p.location].join(" ")) }));
   const state = { q: "", cat: "" };
 
   const src = (p, i) => `images/parts/${p.code}-${i}.jpg`;
@@ -85,6 +85,7 @@ const PARTS = [
       <div class="part-meta">
         <span class="part-stock ${st.cls}"><i></i>${last ? "متاح — آخر قطعة" : st.label}</span>
         ${p.fits ? `<span class="part-fits">🏍️ ${esc(p.fits)}</span>` : `<span class="part-fits">اسأل عن التوافق مع بايكك</span>`}
+        ${p.location ? `<span class="part-loc">📍 ${esc(p.location)}</span>` : ""}
       </div>
       ${p.notes ? `<p class="part-notes">${esc(p.notes)}</p>` : ""}
       <div class="part-foot">
