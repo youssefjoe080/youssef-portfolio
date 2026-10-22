@@ -39,7 +39,7 @@ module.exports = async (req, res) => {
     body: JSON.stringify({
       parent: { type: "data_source_id", data_source_id: DATA_SOURCE_ID },
       properties: {
-        " ": { title: [{ text: { content: name } }] },
+        title: { title: [{ text: { content: name } }] },
         "موبايل": { phone_number: phone },
         "القسم": text("عميل محتمل"),
         "الحالة": { select: { name: "جديد" } },
