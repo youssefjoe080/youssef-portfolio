@@ -107,7 +107,7 @@
             <input name="needs_what" maxlength="120" placeholder="مثال: فردة كاوتش + بطارية" />
           </label>
           <label>السعر النهائي (بالألف جنيه)
-            <input name="price" required inputmode="numeric" maxlength="6" placeholder="مثال: 220" />
+            <input name="price" required inputmode="numeric" maxlength="12" placeholder="مثال: 220 (يعني 220 ألف)" />
           </label>
           <label>أي تفاصيل تانية (اختياري)
             <textarea name="notes" maxlength="500" placeholder="شكمان تعديل، كاوتش جديد، أول مالك..."></textarea>
@@ -175,6 +175,8 @@
       const f = document.getElementById("sellForm");
       if (!f) return;
       const digits = (s) => String(s || "").replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+      // يقبل 240 أو 240000 أو 240,000 أو "240 الف" ويرجعها بالألف
+      const priceK = (v) => { const n = Number(digits(v).replace(/[^\d.]/g, "")); if (!n) return digits(v).trim(); return String(n >= 1000 ? Math.round(n / 1000) : n); };
       f.addEventListener("submit", (e) => {
         e.preventDefault();
         const d = Object.fromEntries(new FormData(f).entries());
@@ -191,7 +193,7 @@
           `🔧 الحالة: ${d.opened}${d.opened === "حالل" && d.opened_what ? " — " + d.opened_what.trim() : ""}`,
           `📄 الرخصة: ${d.license}`,
           `🛠️ مصاريف: ${d.needs}${d.needs === "محتاج" && d.needs_what ? " — " + d.needs_what.trim() : ""}`,
-          `💰 السعر النهائي: ${digits(d.price).trim()} ألف`,
+          `💰 السعر النهائي: ${priceK(d.price)} ألف`,
         ];
         if (d.notes && d.notes.trim()) lines.push(`📝 تفاصيل: ${d.notes.trim()}`);
         lines.push("", "هبعتلك صور البايك دلوقتي 👇");
