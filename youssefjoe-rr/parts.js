@@ -1,8 +1,8 @@
 // ====== قطع الغيار ======
 // كل قطعة: code (كود نوشن) · name · fits (متوافق مع) · price (سعر البيع بالجنيه) · qty · status: "in" | "out" | "order"
-// الصور: images/parts/{code}-1.jpg (اختياري — لو مفيش صورة بيظهر شكل افتراضي)
+// الصور: images/parts/{code}-1.jpg ... photos = عدد الصور (لو 0 بيظهر شكل افتراضي)
 const PARTS = [
-  { code: 156, name: "شكمان Baby King أصلي", category: "شكمانات", fits: "", price: 8500, qty: 1, status: "in", notes: "" }
+  { code: 156, name: "شكمان Baby King أصلي", category: "شكمانات", fits: "", price: 8500, qty: 1, status: "in", photos: 5, notes: "" }
 ];
 
 (function () {
@@ -27,16 +27,50 @@ const PARTS = [
   const parts = PARTS.filter((p) => p && p.name).map((p) => ({ ...p, _hay: norm([p.code, p.name, p.category, p.fits].join(" ")) }));
   const state = { q: "", cat: "" };
 
+  const src = (p, i) => `images/parts/${p.code}-${i}.jpg`;
+
   function media(p) {
     const box = document.createElement("div");
     box.className = "part-media";
     box.innerHTML = `<span class="pill pill-code">#${p.code}</span><div class="part-ph">${ICON}<small>${esc(p.category || "قطعة غيار")}</small></div>`;
-    const img = new Image();
-    img.alt = p.name; img.loading = "lazy";
-    img.onload = () => { box.querySelector(".part-ph").replaceWith(img); };
-    img.src = `images/parts/${p.code}-1.jpg`;
+    if (p.photos > 0) {
+      const img = new Image();
+      img.alt = p.name;
+      img.onload = () => { box.querySelector(".part-ph").replaceWith(img); };
+      img.src = src(p, 1);
+      if (p.photos > 1) box.insertAdjacentHTML("beforeend", `<span class="part-count">📷 ${p.photos}</span>`);
+      box.classList.add("has-photos");
+      box.addEventListener("click", () => openViewer(p));
+    }
     return box;
   }
+
+  // ---------- عارض الصور ----------
+  let viewer;
+  function openViewer(p) {
+    if (!viewer) {
+      viewer = document.createElement("div");
+      viewer.className = "pv";
+      viewer.innerHTML = `<button class="pv-close" aria-label="قفل">✕</button><div class="pv-track"></div><div class="pv-bar"><span class="pv-title"></span><span class="pv-n"></span></div>`;
+      document.body.appendChild(viewer);
+      viewer.querySelector(".pv-close").onclick = closeViewer;
+      viewer.addEventListener("click", (e) => { if (e.target === viewer) closeViewer(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && viewer.classList.contains("open")) closeViewer(); });
+      const tr = viewer.querySelector(".pv-track");
+      tr.addEventListener("scroll", () => {
+        const i = Math.round(Math.abs(tr.scrollLeft) / tr.clientWidth) + 1;
+        viewer.querySelector(".pv-n").textContent = `${i} / ${tr.children.length}`;
+      });
+    }
+    const tr = viewer.querySelector(".pv-track");
+    tr.innerHTML = Array.from({ length: p.photos }, (_, i) => `<div class="pv-slide"><img src="${src(p, i + 1)}" alt="${esc(p.name)}" loading="lazy" /></div>`).join("");
+    viewer.querySelector(".pv-title").textContent = `#${p.code} — ${p.name}`;
+    viewer.querySelector(".pv-n").textContent = `1 / ${p.photos}`;
+    viewer.classList.add("open");
+    document.body.style.overflow = "hidden";
+    tr.scrollLeft = 0;
+  }
+  function closeViewer() { viewer.classList.remove("open"); document.body.style.overflow = ""; }
 
   function card(p) {
     const st = STATUS[p.status] || STATUS.in;

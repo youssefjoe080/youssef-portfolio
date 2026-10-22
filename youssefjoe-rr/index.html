@@ -500,6 +500,17 @@
       border: 1px solid rgba(240,180,41,.35); border-radius: 999px; padding: 7px 16px; background: rgba(240,180,41,.07);
     }
     .parts-link:hover { background: rgba(240,180,41,.14); }
+    .part-media.has-photos { cursor: zoom-in; }
+    .part-count { position: absolute; bottom: 10px; inset-inline-end: 10px; background: rgba(0,0,0,.65); border: 1px solid var(--line); border-radius: 8px; padding: 2px 8px; font-size: .75rem; }
+    .pv { position: fixed; inset: 0; z-index: 200; background: rgba(5,5,7,.94); display: none; flex-direction: column; justify-content: center; }
+    .pv.open { display: flex; }
+    .pv-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .pv-track::-webkit-scrollbar { display: none; }
+    .pv-slide { flex: 0 0 100%; scroll-snap-align: center; display: grid; place-items: center; padding: 0 12px; }
+    .pv-slide img { max-width: 100%; max-height: 78vh; border-radius: 14px; object-fit: contain; }
+    .pv-bar { display: flex; justify-content: space-between; gap: 12px; padding: 14px 20px; color: var(--muted); font-size: .9rem; max-width: 900px; width: 100%; margin: 0 auto; }
+    .pv-title { color: var(--text); font-weight: 700; }
+    .pv-close { position: absolute; top: 16px; inset-inline-end: 16px; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,.06); color: #fff; font-size: 1.1rem; cursor: pointer; z-index: 1; }
     @media (max-width: 520px) {
       .parts-wrap { padding: 20px 14px; border-radius: var(--radius); }
       .parts-search { max-width: none; }
