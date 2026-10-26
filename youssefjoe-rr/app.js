@@ -24,11 +24,15 @@
       return s.replace(/[-_]/g, "").replace(/\s+/g, " ").trim();
     };
 
+    // عروض لفترة محدودة: sale = { off: 5, until: "ISO" } — بتتلغي لوحدها لما الوقت يخلص
+    const NOW = Date.now();
+    BIKES.forEach((b) => { if (b.sale && NOW < Date.parse(b.sale.until)) { b.was = b.price; b.price = b.price - b.sale.off; b.saleUntil = Date.parse(b.sale.until); } });
+    const SALE_END = Math.max(0, ...BIKES.filter((b) => b.was).map((b) => b.saleUntil));
     const bikes = BIKES.map((b) => ({
       ...b,
       _hay: norm([b.code, "code" + b.code, b.brand, b.model, b.model.replace(/\s/g, ""), b.year, b.cc, b.type, TYPES[b.type], BRAND_AR[b.brand], b.location].join(" ")),
     }));
-    const state = { q: "", type: "all", brand: "", budget: "", sort: "new" };
+    const state = { q: "", type: "all", brand: "", budget: "", sort: "new", sale: false };
 
     // ---------- photos ----------
     function photoSrc(code, i, ext = 0) { return `images/bikes/${code}-${i}.${EXTS[ext]}`; }
@@ -57,6 +61,7 @@
         <div class="card-media">
           <span class="pill pill-code">#${b.code}</span>
           ${b.status !== "available" ? `<span class="pill pill-status ${b.status}">${b.status === "sold" ? "اتباع" : "محجوز"}</span>` : ""}
+          ${b.was ? `<span class="pill pill-sale">🔥 خصم ${fmt(b.was - b.price)},000</span>` : ""}
         </div>
         <div class="card-body">
           <div class="card-title"><h3>${title(b)}</h3><span class="year">${b.year || ""}</span></div>
@@ -66,7 +71,7 @@
             ${b.location !== "—" ? `<span>📍 ${b.location}</span>` : ""}
           </div>
           <div class="card-foot">
-            <div class="price">${fmt(b.price)}<small>ألف ج.م</small></div>
+            <div class="price">${b.was ? `<s class="was">${fmt(b.was)}</s>` : ""}${fmt(b.price)}<small>ألف ج.م</small></div>
             <a class="btn btn-wa" target="_blank" rel="noopener" href="${waLink(`السلام عليكم، عايز أستفسر عن بايك كود ${b.code} — ${title(b)} ${b.year || ""}`)}">واتساب</a>
           </div>
         </div>`;
@@ -80,6 +85,7 @@
     function filtered() {
       const tokens = norm(state.q).split(" ").filter(Boolean);
       let list = bikes.filter((b) => {
+        if (state.sale && !b.was) return false;
         if (state.type !== "all" && b.type !== state.type) return false;
         if (state.brand && b.brand !== state.brand) return false;
         if (state.budget) { const [lo, hi] = state.budget.split("-").map(Number); if (b.price < lo || b.price > hi) return false; }
@@ -153,7 +159,8 @@
         <div><span class="pill pill-code" style="position:static;display:inline-block">#${b.code}</span>
           ${b.status !== "available" ? `<span class="pill pill-status ${b.status}" style="position:static;display:inline-block">${b.status === "sold" ? "اتباع" : "محجوز"}</span>` : ""}</div>
         <h2>${title(b)} ${b.year || ""}</h2>
-        <div class="modal-price"><b>${fmt(b.price)}</b><small>ألف جنيه — قابل للتفاوض</small></div>
+        <div class="modal-price">${b.was ? `<s class="was">${fmt(b.was)}</s>` : ""}<b>${fmt(b.price)}</b><small>ألف جنيه — قابل للتفاوض</small></div>
+        ${b.was ? `<div class="sale-note">🔥 عرض لفترة محدودة — باقي <b data-countdown="${b.saleUntil}">—</b></div>` : ""}
         <div class="kv">
           <div><small>الموديل</small><b>${b.year || "—"}</b></div>
           <div><small>السعة</small><b>${b.cc}cc</b></div>
@@ -192,7 +199,7 @@
       if (location.hash.startsWith("#bike-")) history.replaceState(null, "", location.pathname + location.search);
     }
     async function shareBike(b) {
-      const url = `${location.origin}${location.pathname}#bike-${b.code}`;
+      const url = `${location.origin}/b/${b.code}`;
       const text = `${title(b)} ${b.year || ""} — ${fmt(b.price)} ألف | youssefjoe.rr`;
       try {
         if (navigator.share) { await navigator.share({ title: text, url }); return; }
@@ -227,11 +234,43 @@
       const latest = $("#latest");
       if (latest) [...avail].sort((a, b) => b.code - a.code).slice(0, 6).forEach((b) => latest.appendChild(card(b)));
 
+      // بانر العروض + العداد التنازلي
+      const onBikesPage = !!$("#grid");
+      const saleCount = bikes.filter((b) => b.was).length;
+      if (saleCount) {
+        const bar = document.createElement("div");
+        bar.className = "sale-bar";
+        bar.innerHTML = `<div class="container sale-inner">
+          <span class="sale-fire">🔥</span>
+          <span class="sale-text"><b>عرض 48 ساعة</b> — خصم على ${saleCount} بايك</span>
+          <span class="sale-timer">باقي <b data-countdown="${SALE_END}">—</b></span>
+          <a class="btn btn-primary sale-btn" href="bikes.html?sale=1">شوف العروض</a></div>`;
+        const nav = document.querySelector("header.nav");
+        if (nav) nav.after(bar);
+        if (onBikesPage) bar.querySelector(".sale-btn").onclick = (e) => { e.preventDefault(); toggleSale(true); $("#bikes").scrollIntoView({ behavior: "smooth" }); };
+      }
+      const pad = (n) => String(n).padStart(2, "0");
+      const tick = () => document.querySelectorAll("[data-countdown]").forEach((el) => {
+        const ms = +el.dataset.countdown - Date.now();
+        if (ms <= 0) { el.textContent = "انتهى العرض"; return; }
+        const h = Math.floor(ms / 3600000), m = Math.floor(ms / 60000) % 60, sec = Math.floor(ms / 1000) % 60;
+        el.textContent = `${pad(h)}:${pad(m)}:${pad(sec)}`;
+      });
+      tick(); setInterval(tick, 1000);
+
       const onBikes = !!$("#grid");
       if (onBikes) {
       const pq = new URLSearchParams(location.search).get("q");
       if (pq) { state.q = pq; $("#q").value = pq; }
       const chips = $("#typeChips");
+      if (saleCount) {
+        const sc = document.createElement("button");
+        sc.className = "chip chip-sale"; sc.textContent = "🔥 العروض";
+        sc.onclick = () => toggleSale(!state.sale);
+        chips.appendChild(sc);
+      }
+      window.toggleSale = (on) => { state.sale = on; const sc = chips.querySelector(".chip-sale"); if (sc) sc.classList.toggle("active", on); render(); };
+      if (new URLSearchParams(location.search).get("sale") === "1" && saleCount) { state.sale = true; const sc = chips.querySelector(".chip-sale"); if (sc) sc.classList.add("active"); }
       Object.entries(TYPES).forEach(([k, v]) => {
         if (k !== "all" && !bikes.some((b) => b.type === k)) return;
         const c = document.createElement("button");

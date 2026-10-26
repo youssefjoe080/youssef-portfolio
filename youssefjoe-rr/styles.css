@@ -578,3 +578,20 @@ footer .container { display: flex; justify-content: space-between; flex-wrap: wr
   .sell-card { padding: 20px 16px; }
   .page-head { padding: 34px 0 18px; }
 }
+
+/* ===== SALE (عروض لفترة محدودة) ===== */
+.sale-bar { background: linear-gradient(90deg, #7a0d17, #e11d2e 50%, #7a0d17); border-bottom: 1px solid rgba(255,255,255,.12); }
+.sale-inner { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 10px 16px; flex-wrap: wrap; text-align: center; }
+.sale-fire { font-size: 1.3rem; }
+.sale-text { font-weight: 600; }
+.sale-timer { background: rgba(0,0,0,.35); border-radius: 10px; padding: 4px 12px; font-size: .9rem; }
+.sale-timer b, .sale-note b { font-variant-numeric: tabular-nums; direction: ltr; display: inline-block; }
+.sale-btn { background: #fff !important; color: #b0101f !important; padding: 7px 16px; font-size: .88rem; }
+.pill-sale { inset-inline-end: 12px; top: auto; bottom: 12px; background: var(--accent); color: #fff; }
+.price .was, .modal-price .was { color: var(--muted); font-size: .8em; font-weight: 700; margin-inline-end: 8px; text-decoration-thickness: 2px; text-decoration-color: var(--accent); }
+.sale-note { margin: -4px 0 14px; padding: 8px 12px; border-radius: 10px; background: rgba(225,29,46,.12); border: 1px solid rgba(225,29,46,.35); font-size: .9rem; }
+.chip-sale { border-color: rgba(225,29,46,.55) !important; }
+@media (max-width: 520px) {
+  .sale-inner { gap: 8px; padding: 8px 10px; font-size: .85rem; }
+  .sale-btn { padding: 6px 12px; }
+}
