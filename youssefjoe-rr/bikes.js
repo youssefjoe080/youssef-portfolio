@@ -54,8 +54,6 @@ const BIKES = [
   { code: 39, brand: "Honda", model: "Hornet 919", year: 2002, type: "naked", cc: 900, km: "45,000", location: "إمبابة", license: "مرور الجيزة", price: 195, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["مش راشة قبل كده", "زيت Motul 7100 أصلي", "آلات جر وورق دبرياج جديد", "جادون وحامل نمر تعديل", "تنبورة خلفي جديدة", "محتاجة كتينة"] },
 
-  { code: 40, brand: "Honda", model: "CBR 600RR", year: 2008, type: "sport", cc: 600, km: "68,000", location: "ملوي — المنيا", license: "رخصة 3 سنين", price: 280, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
-    features: ["فيبر ABS", "الموتور ما اتحلش — الوشوش مش حالة", "الشاسيه سليم", "رش نضافة"] },
 
   { code: 41, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "61,500", location: "السويس", license: "سنة ونص — مرور السويس", price: 145, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["وشين صيانة فقط", "فردتين جداد", "تعديلات خارجية كتير", "شكمان ستوك", "مش محتاجة جنيه مصروف"] },
