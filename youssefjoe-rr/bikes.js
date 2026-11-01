@@ -129,7 +129,7 @@ const BIKES = [
     features: ["الموتور سليم ما اتحلش أي حاجة", "فردة قدام جديدة", "كل الصيانات معمولة (زيت وفلتر)", "علبة SC Project + العلبة الأصلية موجودة", "ديل ومقابض تعديل", "راشة"] },
 
 
-  { code: 101, brand: "Honda", model: "Hornet 600", year: 2005, type: "naked", cc: 600, km: "43,000", location: "—", license: "منتهية من 6 شهور", price: 120, status: "available",
+  { code: 101, brand: "Honda", model: "Hornet 600", year: 2005, type: "naked", cc: 600, km: "43,000", location: "—", license: "منتهية من 6 شهور", price: 220, status: "available",
     features: ["السعر فيه تفاوض", "الموتور ما اتحلش", "سيرفس كامل: زيت وفلتر + بوجيهات NGK + دورة مياه", "تعديلات كتير — وكل القطع الاستوك معاها", "رش نضافة"] },
 
   { code: 103, brand: "Suzuki", model: "GSR 600 (بيبي كينج)", year: 2008, type: "naked", cc: 600, km: "54,000", location: "المنصورة", license: "3 سنين — مرور المنصورة", price: 240, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
