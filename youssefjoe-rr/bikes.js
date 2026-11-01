@@ -120,13 +120,9 @@ const BIKES = [
   { code: 85, brand: "Honda", model: "CBR 600RR", year: 2009, type: "sport", cc: 600, km: "51,000", location: "العبور", license: "منتهية — مرور الأميرية", price: 290, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["فيبر ABS", "وشين صيانة فقط", "كل الصيانة معمولة", "كل حاجة في البايك جديدة"] },
 
-  { code: 86, brand: "Honda", model: "Hornet 600", year: 2006, type: "naked", cc: 600, km: "39,000", location: "كرداسة", license: "سنتين — أول توكيل", price: 200, status: "available",
-    features: ["السعر فيه تفاوض", "فابريكا — ما اتحلش ولا وش", "3,000 كم بس في مصر", "كاوتش أمامي 100% / خلفي 75%", "راك + مقبض تانك + سلايدرات تعديل", "رفرف خلفي + علبة جنزير + إسكرينة"] },
 
 
 
-  { code: 90, brand: "Honda", model: "Hornet 600", year: 2006, type: "naked", cc: 600, km: "65,000", location: "حدائق حلوان", license: "سنتين — مرور المعادي", price: 195, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
-    features: ["حالل جوان وش السلندر فقط", "مرايات + جادون + شكمان تعديل", "مقبض وسلايدرات تعديل", "رش نضافة", "مش محتاجة أي مصاريف"] },
 
 
   { code: 92, brand: "Honda", model: "Hornet 600", year: 2007, type: "naked", cc: 600, km: "73,000", location: "السويس", license: "رخصة سنة — مرور السويس", price: 240, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
