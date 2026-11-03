@@ -39,7 +39,8 @@ const PARTS = [
   { code: 267, name: "ترسين اتزان فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 1500, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 268, name: "مجموعة فتيس فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 3000, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 269, name: "كنترول (CDI) فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 850, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 270, name: "فانوس خلفي فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 1100, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 270, name: "فانوس خلفي فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 1100, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 271, name: "فولام فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 2000, qty: 100, status: "in", photos: 1, notes: "" }
 ];
 
 (function () {
