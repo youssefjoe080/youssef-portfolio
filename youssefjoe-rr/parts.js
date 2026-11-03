@@ -16,7 +16,10 @@ const PARTS = [
   { code: 239, name: "فلانشة ترس خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 900, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 241, name: "ترس خلفي فيجوري VR300 — الجندي", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 700, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 242, name: "عامود كامة فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 1200, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 243, name: "جنطين فيجوري VR300 (أمامي + خلفي)", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 8500, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 243, name: "جنطين فيجوري VR300 (أمامي + خلفي)", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 8500, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 244, name: "بستم بسلندر فيجوري VR300 — أبو حوا", category: "موتور", fits: "Vigory VR300", location: "", price: 3200, qty: 100, status: "in", photos: 1, notes: "طقم: سلندر + بستم + شنابر + جوانات" },
+  { code: 245, name: "بستم بسلندر فيجوري VR300 — الجندي", category: "موتور", fits: "Vigory VR300", location: "", price: 2800, qty: 100, status: "in", photos: 1, notes: "طقم: سلندر + بستم + شنابر + جوانات" },
+  { code: 246, name: "بستم بسلندر فيجوري VR300 — أصلي", category: "موتور", fits: "Vigory VR300", location: "", price: 3400, qty: 100, status: "in", photos: 1, notes: "طقم: سلندر + بستم + شنابر + جوانات" }
 ];
 
 (function () {
