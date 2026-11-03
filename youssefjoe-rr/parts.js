@@ -32,7 +32,8 @@ const PARTS = [
   { code: 260, name: "دمشة فرامل أمامي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 750, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 261, name: "دمشة فرامل خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 750, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 262, name: "جنزير استوك فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 850, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 263, name: "ترس خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 500, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 263, name: "ترس خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 500, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 264, name: "ترس أمامي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 300, qty: 100, status: "in", photos: 0, notes: "" }
 ];
 
 (function () {
