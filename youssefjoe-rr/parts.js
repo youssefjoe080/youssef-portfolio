@@ -20,7 +20,8 @@ const PARTS = [
   { code: 244, name: "بستم بسلندر فيجوري VR300 — أبو حوا", category: "موتور", fits: "Vigory VR300", location: "", price: 3200, qty: 100, status: "in", photos: 1, notes: "طقم: سلندر + بستم + شنابر + جوانات" },
   { code: 245, name: "بستم بسلندر فيجوري VR300 — الجندي", category: "موتور", fits: "Vigory VR300", location: "", price: 2800, qty: 100, status: "in", photos: 1, notes: "طقم: سلندر + بستم + شنابر + جوانات" },
   { code: 246, name: "بستم بسلندر فيجوري VR300 — أصلي", category: "موتور", fits: "Vigory VR300", location: "", price: 3400, qty: 100, status: "in", photos: 1, notes: "طقم: سلندر + بستم + شنابر + جوانات" },
-  { code: 247, name: "مكنة سرعة فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 700, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 247, name: "مكنة سرعة فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 700, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 248, name: "رقبة فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 1500, qty: 100, status: "in", photos: 1, notes: "" }
 ];
 
 (function () {
