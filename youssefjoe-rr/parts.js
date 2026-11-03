@@ -41,7 +41,11 @@ const PARTS = [
   { code: 269, name: "كنترول (CDI) فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 850, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 270, name: "فانوس خلفي فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 1100, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 271, name: "فولام فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 2000, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 272, name: "ملف كهرباء فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 1200, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 272, name: "ملف كهرباء فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 1200, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 240, name: "كتل مقابض (مفاتيح الجادون) فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 249, name: "عصاية غيارات فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 600, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 257, name: "اسطوانة فرامل خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 258, name: "اسطوانة فرامل أمامي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" }
 ];
 
 (function () {
