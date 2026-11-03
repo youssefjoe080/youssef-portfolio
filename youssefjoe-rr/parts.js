@@ -30,7 +30,8 @@ const PARTS = [
   { code: 256, name: "جنزير فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 1250, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 259, name: "سربنتينة زيت فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 3500, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 260, name: "دمشة فرامل أمامي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 750, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 261, name: "دمشة فرامل خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 750, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 261, name: "دمشة فرامل خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 750, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 262, name: "جنزير استوك فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 850, qty: 100, status: "in", photos: 1, notes: "" }
 ];
 
 (function () {
