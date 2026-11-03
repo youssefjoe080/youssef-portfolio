@@ -23,7 +23,8 @@ const PARTS = [
   { code: 247, name: "مكنة سرعة فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 700, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 248, name: "رقبة فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 1500, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 251, name: "جادون فيجوري VR300", category: "إكسسوارات", fits: "Vigory VR300", location: "", price: 600, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 252, name: "مرايات فيجوري VR300 (جوز)", category: "إكسسوارات", fits: "Vigory VR300", location: "", price: 500, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 252, name: "مرايات فيجوري VR300 (جوز)", category: "إكسسوارات", fits: "Vigory VR300", location: "", price: 500, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 253, name: "مقص خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 1100, qty: 100, status: "in", photos: 1, notes: "المساعد اللي في الصورة مش داخل — متاح لوحده كود 230" }
 ];
 
 (function () {
