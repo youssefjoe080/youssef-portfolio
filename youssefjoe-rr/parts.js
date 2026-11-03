@@ -12,7 +12,8 @@ const PARTS = [
   { code: 235, name: "فيبر موتور فيجوري VR300 (جوز)", category: "فيبر", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 236, name: "ترابة خلفية فيجوري VR300", category: "فيبر", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 237, name: "ديل خلفي فيجوري VR300", category: "فيبر", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 238, name: "خزنة صبابات فيجوري VR300 — أصلية", category: "موتور", fits: "Vigory VR300", location: "", price: 4000, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 238, name: "خزنة صبابات فيجوري VR300 — أصلية", category: "موتور", fits: "Vigory VR300", location: "", price: 4000, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 239, name: "فلانشة ترس خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 900, qty: 100, status: "in", photos: 1, notes: "" }
 ];
 
 (function () {
