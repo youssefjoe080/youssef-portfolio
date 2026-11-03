@@ -15,7 +15,8 @@ const PARTS = [
   { code: 238, name: "خزنة صبابات فيجوري VR300 — أصلية", category: "موتور", fits: "Vigory VR300", location: "", price: 4000, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 239, name: "فلانشة ترس خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 900, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 241, name: "ترس خلفي فيجوري VR300 — الجندي", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 700, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 242, name: "عامود كامة فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 1200, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 242, name: "عامود كامة فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 1200, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 243, name: "جنطين فيجوري VR300 (أمامي + خلفي)", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 8500, qty: 100, status: "in", photos: 1, notes: "" }
 ];
 
 (function () {
