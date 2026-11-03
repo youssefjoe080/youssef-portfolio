@@ -26,7 +26,8 @@ const PARTS = [
   { code: 252, name: "مرايات فيجوري VR300 (جوز)", category: "إكسسوارات", fits: "Vigory VR300", location: "", price: 500, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 253, name: "مقص خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 1100, qty: 100, status: "in", photos: 1, notes: "المساعد اللي في الصورة مش داخل — متاح لوحده كود 230" },
   { code: 254, name: "شكمان فيجوري VR300 كامل (علبة + ماسورة)", category: "شكمانات", fits: "Vigory VR300", location: "", price: 3000, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 255, name: "فيبر فانوس فيجوري VR300", category: "فيبر", fits: "Vigory VR300", location: "", price: 1100, qty: 100, status: "in", photos: 1, notes: "ألوان: برتقاني · أبيض · أسود · أحمر · أخضر — اسأل على المتاح" }
+  { code: 255, name: "فيبر فانوس فيجوري VR300", category: "فيبر", fits: "Vigory VR300", location: "", price: 1100, qty: 100, status: "in", photos: 1, notes: "ألوان: برتقاني · أبيض · أسود · أحمر · أخضر — اسأل على المتاح" },
+  { code: 256, name: "جنزير فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 1250, qty: 100, status: "in", photos: 1, notes: "" }
 ];
 
 (function () {
