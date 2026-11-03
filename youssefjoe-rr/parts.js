@@ -69,26 +69,56 @@ const PARTS = [
     .replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d))
     .replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي").replace(/\s+/g, " ").trim();
 
-  const STATUS = {
-    in: { label: "متاح", cls: "in" },
-    order: { label: "تحت الطلب", cls: "order" },
-    out: { label: "خلصت", cls: "out" },
-  };
-  const ICON = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M40 10a12 12 0 0 0-11 16L12 43a5 5 0 0 0 7 7l17-17a12 12 0 0 0 16-11l-7 7-6-2-2-6 7-7a12 12 0 0 0-4-4z"/></svg>`;
+  // الأقسام بالترتيب اللي بتظهر بيه + أيقونة لكل قسم
+  const CATS = [
+    { key: "خوذ", icon: "🪖" },
+    { key: "إكسسوارات", icon: "✨" },
+    { key: "شكمانات", icon: "🔥" },
+    { key: "فيبر", icon: "🎨" },
+    { key: "عجل وفرامل", icon: "🛞" },
+    { key: "موتور", icon: "⚙️" },
+    { key: "كهربا", icon: "⚡" },
+    { key: "مساعدين", icon: "🔩" },
+  ];
+  const catIcon = (c) => (CATS.find((x) => x.key === c) || {}).icon || "🔧";
+  const catRank = (c) => { const i = CATS.findIndex((x) => x.key === c); return i < 0 ? 99 : i; };
 
-  const parts = PARTS.filter((p) => p && p.name).map((p) => ({ ...p, _hay: norm([p.code, p.name, p.category, p.fits, p.location].join(" ")) }));
-  const state = { q: "", cat: "" };
+  // البايك المناسب: من خانة fits
+  const BIKES = [
+    { key: "vr300", label: "فيجوري VR300", test: (f) => /vigory|فيجوري/i.test(f) },
+    { key: "gsr600", label: "سوزوكي GSR600", test: (f) => /gsr|suzuki/i.test(f) },
+    { key: "uni", label: "يونيفرسال (أي بايك)", test: () => true },
+  ];
+  const bikeOf = (p) => BIKES.find((b) => b.test(p.fits || "")).key;
+
+  const ICON = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M40 10a12 12 0 0 0-11 16L12 43a5 5 0 0 0 7 7l17-17a12 12 0 0 0 16-11l-7 7-6-2-2-6 7-7a12 12 0 0 0-4-4z"/></svg>`;
+  const WA_ICON = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>`;
+
+  const parts = PARTS.filter((p) => p && p.name).map((p) => ({ ...p, _bike: bikeOf(p), _hay: norm([p.code, p.name, p.category, p.fits, p.location, p.notes].join(" ")) }));
+  const params = new URLSearchParams(location.search);
+  const state = {
+    q: params.get("q") || "",
+    cat: params.get("cat") || "",
+    bike: BIKES.some((b) => b.key === params.get("bike")) ? params.get("bike") : "",
+    sort: params.get("sort") || "new",
+  };
 
   const src = (p, i) => `images/parts/${p.code}-${i}.jpg`;
 
   function media(p) {
     const box = document.createElement("div");
     box.className = "part-media";
-    box.innerHTML = `<span class="pill pill-code">#${p.code}</span><div class="part-ph">${ICON}<small>${esc(p.category || "قطعة غيار")}</small></div>`;
+    const last = p.status === "in" && p.qty === 1;
+    box.innerHTML = `<span class="pill pill-code">#${p.code}</span>${last ? `<span class="part-flag">آخر قطعة</span>` : p.status === "out" ? `<span class="part-flag out">خلصت</span>` : p.status === "order" ? `<span class="part-flag order">تحت الطلب</span>` : ""}<div class="part-ph">${ICON}<small>${esc(p.category || "قطعة غيار")}</small></div>`;
     if (p.photos > 0) {
       const img = new Image();
       img.alt = p.name;
-      img.onload = () => { box.querySelector(".part-ph").replaceWith(img); };
+      img.decoding = "async";
+      img.onload = () => {
+        box.style.setProperty("--bg-img", `url("${img.src}")`);
+        box.classList.add("loaded");
+        box.querySelector(".part-ph").replaceWith(img);
+      };
       img.src = src(p, 1);
       if (p.photos > 1) box.insertAdjacentHTML("beforeend", `<span class="part-count">📷 ${p.photos}</span>`);
       box.classList.add("has-photos");
@@ -103,7 +133,7 @@ const PARTS = [
     if (!viewer) {
       viewer = document.createElement("div");
       viewer.className = "pv";
-      viewer.innerHTML = `<button class="pv-close" aria-label="قفل">✕</button><div class="pv-track"></div><div class="pv-bar"><span class="pv-title"></span><span class="pv-n"></span></div>`;
+      viewer.innerHTML = `<button class="pv-close" aria-label="قفل">✕</button><div class="pv-track"></div><div class="pv-bar"><span class="pv-title"></span><span class="pv-n"></span></div><div class="pv-cta"></div>`;
       document.body.appendChild(viewer);
       viewer.querySelector(".pv-close").onclick = closeViewer;
       viewer.addEventListener("click", (e) => { if (e.target === viewer) closeViewer(); });
@@ -118,70 +148,155 @@ const PARTS = [
     tr.innerHTML = Array.from({ length: p.photos }, (_, i) => `<div class="pv-slide"><img src="${src(p, i + 1)}" alt="${esc(p.name)}" loading="lazy" /></div>`).join("");
     viewer.querySelector(".pv-title").textContent = `#${p.code} — ${p.name}`;
     viewer.querySelector(".pv-n").textContent = `1 / ${p.photos}`;
+    viewer.querySelector(".pv-cta").innerHTML = `<b>${p.price ? fmt(p.price) + " ج.م" : ""}</b><a class="btn btn-wa" target="_blank" rel="noopener" href="${wa(`السلام عليكم، عايز قطعة غيار كود ${p.code} — ${p.name}`)}">${WA_ICON} اطلبها على واتساب</a>`;
     viewer.classList.add("open");
     document.body.style.overflow = "hidden";
     tr.scrollLeft = 0;
   }
   function closeViewer() { viewer.classList.remove("open"); document.body.style.overflow = ""; }
 
+  function shortFits(p) {
+    const f = p.fits || "";
+    if (p._bike === "vr300") return "فيجوري VR300";
+    if (p._bike === "gsr600") return f;
+    return f.split("—")[0].trim() || "يونيفرسال";
+  }
+
   function card(p) {
-    const st = STATUS[p.status] || STATUS.in;
-    const last = p.status === "in" && p.qty === 1;
     const el = document.createElement("article");
     el.className = "part-card" + (p.status === "out" ? " is-out" : "");
     el.appendChild(media(p));
     const body = document.createElement("div");
     body.className = "part-body";
     body.innerHTML = `
-      <h3>${esc(p.name)}</h3>
-      <div class="part-meta">
-        <span class="part-stock ${st.cls}"><i></i>${last ? "متاح — آخر قطعة" : st.label}</span>
-        ${p.fits ? `<span class="part-fits">🏍️ ${esc(p.fits)}</span>` : `<span class="part-fits">اسأل عن التوافق مع بايكك</span>`}
-        ${p.location ? `<span class="part-loc">📍 ${esc(p.location)}</span>` : ""}
-      </div>
+      <h3 title="${esc(p.name)}">${esc(p.name)}</h3>
+      <div class="part-fit">🏍️ ${esc(shortFits(p))}${p.location ? ` · 📍 ${esc(p.location)}` : ""}</div>
       ${p.notes ? `<p class="part-notes">${esc(p.notes)}</p>` : ""}
       <div class="part-foot">
         <div class="price">${p.price ? fmt(p.price) + "<small>ج.م</small>" : "<small>السعر على واتساب</small>"}</div>
-        <a class="btn btn-wa" target="_blank" rel="noopener" href="${wa(`السلام عليكم، عايز قطعة غيار كود ${p.code} — ${p.name}`)}">${p.status === "out" ? "اسأل عليها" : "اطلبها"}</a>
+        <a class="part-buy" target="_blank" rel="noopener" aria-label="اطلب ${esc(p.name)} على واتساب" href="${wa(`السلام عليكم، عايز قطعة غيار كود ${p.code} — ${p.name}`)}">${WA_ICON}<span>${p.status === "out" ? "اسأل" : "اطلب"}</span></a>
       </div>`;
     el.appendChild(body);
     return el;
   }
 
-  function render() {
-    const tokens = norm(state.q).split(" ").filter(Boolean);
-    const list = parts
-      .filter((p) => (!state.cat || p.category === state.cat) && tokens.every((t) => p._hay.includes(t)))
-      .sort((a, b) => ({ in: 0, order: 1, out: 2 }[a.status] ?? 0) - ({ in: 0, order: 1, out: 2 }[b.status] ?? 0));
-    root.innerHTML = "";
-    list.forEach((p) => root.appendChild(card(p)));
+  function requestCard() {
     const req = document.createElement("article");
     req.className = "part-card part-request";
     req.innerHTML = `
       <div class="part-req-icon">🔍</div>
-      <h3>مش لاقي القطعة؟</h3>
-      <p>ابعتلي اسم القطعة وموديل البايك، وأنا أدورلك عليها وأجيبهالك بأحسن سعر.</p>
+      <div><h3>مش لاقي القطعة؟</h3>
+      <p>ابعتلي اسم القطعة وموديل البايك، وأنا أدورلك عليها وأجيبهالك بأحسن سعر.</p></div>
       <a class="btn btn-primary" target="_blank" rel="noopener" href="${wa("السلام عليكم، بدور على قطعة غيار:\nالقطعة: \nالبايك والموديل: ")}">اطلب قطعة</a>`;
+    return req;
+  }
+
+  const SORTS = {
+    new: (a, b) => b.code - a.code,
+    low: (a, b) => (a.price || 1e9) - (b.price || 1e9),
+    high: (a, b) => (b.price || 0) - (a.price || 0),
+  };
+
+  function filtered(ignore) {
+    const tokens = norm(state.q).split(" ").filter(Boolean);
+    return parts.filter((p) =>
+      (ignore === "cat" || !state.cat || p.category === state.cat) &&
+      (ignore === "bike" || !state.bike || p._bike === state.bike) &&
+      tokens.every((t) => p._hay.includes(t)));
+  }
+
+  function syncUrl() {
+    const u = new URLSearchParams();
+    if (state.cat) u.set("cat", state.cat);
+    if (state.bike) u.set("bike", state.bike);
+    if (state.sort !== "new") u.set("sort", state.sort);
+    const qs = u.toString();
+    history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
+  }
+
+  const catsEl = document.getElementById("partsChips");
+  const bikesEl = document.getElementById("partsBikes");
+  const sortEl = document.getElementById("partsSort");
+
+  function chip(label, count, active, onClick, extra = "") {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "pchip" + (active ? " active" : "") + extra;
+    b.innerHTML = `${label}<span class="n">${count}</span>`;
+    b.onclick = onClick;
+    return b;
+  }
+
+  function renderChips() {
+    if (catsEl) {
+      const pool = filtered("cat");
+      catsEl.innerHTML = "";
+      catsEl.appendChild(chip("🧰 الكل", pool.length, !state.cat, () => { state.cat = ""; update(); }));
+      [...new Set(parts.map((p) => p.category).filter(Boolean))].sort((a, b) => catRank(a) - catRank(b)).forEach((c) => {
+        const n = pool.filter((p) => p.category === c).length;
+        if (!n && state.cat !== c) return;
+        catsEl.appendChild(chip(`${catIcon(c)} ${c}`, n, state.cat === c, () => { state.cat = state.cat === c ? "" : c; update(); }));
+      });
+      const a = catsEl.querySelector(".active");
+      if (a && userActed) catsEl.scrollTo({ left: a.offsetLeft - catsEl.clientWidth / 2 + a.offsetWidth / 2, behavior: "smooth" });
+    }
+    if (bikesEl) {
+      const pool = filtered("bike");
+      bikesEl.innerHTML = `<span class="pbikes-label">🏍️ لبايك:</span>`;
+      bikesEl.appendChild(chip("الكل", pool.length, !state.bike, () => { state.bike = ""; update(); }, " sm"));
+      BIKES.forEach((b) => {
+        const n = pool.filter((p) => p._bike === b.key).length;
+        if (!n) return;
+        bikesEl.appendChild(chip(b.label, n, state.bike === b.key, () => { state.bike = state.bike === b.key ? "" : b.key; update(); }, " sm"));
+      });
+    }
+  }
+
+  function grid(list) {
+    const g = document.createElement("div");
+    g.className = "parts-grid";
+    list.forEach((p) => g.appendChild(card(p)));
+    return g;
+  }
+
+  function render() {
+    const list = filtered().sort(SORTS[state.sort] || SORTS.new);
+    root.innerHTML = "";
+    root.className = "parts-results";
+    const grouped = !state.cat && !state.q.trim() && state.sort === "new";
+    if (!list.length) {
+      root.insertAdjacentHTML("beforeend", `<div class="parts-empty">مفيش قطع بالبحث ده 🤷‍♂️ — جرّب كلمة تانية أو اطلبها مني تحت.</div>`);
+    } else if (grouped) {
+      const cats = [...new Set(list.map((p) => p.category || "أخرى"))].sort((a, b) => catRank(a) - catRank(b));
+      cats.forEach((c) => {
+        const items = list.filter((p) => (p.category || "أخرى") === c);
+        const sec = document.createElement("section");
+        sec.className = "parts-group";
+        sec.innerHTML = `<div class="parts-group-head"><h2>${catIcon(c)} ${esc(c)} <span>${items.length}</span></h2>${items.length > PREVIEW ? `<button type="button" class="parts-more">عرض الكل (${items.length}) ←</button>` : ""}</div>`;
+        const btn = sec.querySelector(".parts-more");
+        if (btn) btn.onclick = () => { state.cat = c; update(); document.getElementById("parts").scrollIntoView({ behavior: "smooth" }); };
+        sec.appendChild(grid(items.slice(0, PREVIEW)));
+        root.appendChild(sec);
+      });
+    } else {
+      root.appendChild(grid(list));
+    }
+    const req = grid([]); req.appendChild(requestCard()); req.classList.add("parts-req-row");
     root.appendChild(req);
     const c = document.getElementById("partsCount");
     if (c) c.textContent = `${list.length} قطعة`;
   }
 
-  // category chips (تظهر لما يبقى فيه أكتر من قسم)
-  const chips = document.getElementById("partsChips");
-  const cats = [...new Set(parts.map((p) => p.category).filter(Boolean))];
-  if (chips && cats.length > 1) {
-    ["", ...cats].forEach((cat) => {
-      const b = document.createElement("button");
-      b.type = "button"; b.textContent = cat || "الكل";
-      b.className = "chip" + (cat === state.cat ? " active" : "");
-      b.onclick = () => { state.cat = cat; chips.querySelectorAll(".chip").forEach((x) => x.classList.toggle("active", x === b)); render(); };
-      chips.appendChild(b);
-    });
-  }
+  let userActed = false;
+  const PREVIEW = 4;
+  function update() { renderChips(); render(); syncUrl(); userActed = true; }
 
   const q = document.getElementById("partsQ");
-  if (q) { let t; q.addEventListener("input", () => { clearTimeout(t); t = setTimeout(() => { state.q = q.value; render(); }, 150); }); }
+  if (q) {
+    q.value = state.q;
+    let t; q.addEventListener("input", () => { clearTimeout(t); t = setTimeout(() => { state.q = q.value; update(); }, 150); });
+  }
+  if (sortEl) { sortEl.value = state.sort; sortEl.onchange = () => { state.sort = sortEl.value; update(); }; }
 
-  render();
+  update();
 })();
