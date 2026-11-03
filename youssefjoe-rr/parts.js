@@ -49,7 +49,8 @@ const PARTS = [
   { code: 274, name: "خوذة LS2 Rapid II", category: "خوذ", fits: "فول فيس — يونيفرسال", location: "", price: 3100, qty: 100, status: "in", photos: 4, notes: "شهادة أمان ECE 22.06 · زجاج ضد الخدش وUV · جاهزة لإنتركوم Cardo — اسأل على المقاسات" },
   { code: 275, name: "خوذة LS2 Cosmos — زجاج سموكي", category: "خوذ", fits: "فول فيس — يونيفرسال", location: "", price: 3800, qty: 100, status: "in", photos: 4, notes: "شهادة أمان ECE 22.06 · سبويلر خلفي · المقاس في الصور XL — اسأل على باقي المقاسات" },
   { code: 276, name: "خوذة MRC فليب أب (الدقن بتتفتح)", category: "خوذ", fits: "فول فيس / مودولار — يونيفرسال", location: "", price: 2800, qty: 100, status: "in", photos: 8, notes: "شهادة أمان ECE 22.06 · لونين: أبيض×موف وأبيض×أحمر×أصفر · زجاج شمس داخلي — اسأل على المقاسات" },
-  { code: 277, name: "ركب سيفتي VEMAR (حماية ركبة)", category: "إكسسوارات", fits: "يونيفرسال — مقاس L", location: "", price: 650, qty: 100, status: "in", photos: 2, notes: "جوز ركب · مقاومة للصدمات · عاكسة للضوء" }
+  { code: 277, name: "ركب سيفتي VEMAR (حماية ركبة)", category: "إكسسوارات", fits: "يونيفرسال — مقاس L", location: "", price: 650, qty: 100, status: "in", photos: 2, notes: "جوز ركب · مقاومة للصدمات · عاكسة للضوء" },
+  { code: 278, name: "مرايات موتوسيكل (جوز)", category: "إكسسوارات", fits: "يونيفرسال — اسأل على المقاس والقلاووظ", location: "", price: 1100, qty: 100, status: "in", photos: 2, notes: "موديلات وأشكال مختلفة زي الصور — اسأل على المتاح" }
 ];
 
 (function () {
