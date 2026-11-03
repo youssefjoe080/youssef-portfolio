@@ -9,7 +9,8 @@ const PARTS = [
   { code: 232, name: "بلاطة شحن فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 700, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 233, name: "مساعدين أمامي فيجوري VR300 (جوز)", category: "مساعدين", fits: "Vigory VR300", location: "", price: 7000, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 234, name: "فيبر تانك (نص) فيجوري VR300", category: "فيبر", fits: "Vigory VR300", location: "", price: 850, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 235, name: "فيبر موتور فيجوري VR300 (جوز)", category: "فيبر", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 235, name: "فيبر موتور فيجوري VR300 (جوز)", category: "فيبر", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 236, name: "ترابة خلفية فيجوري VR300", category: "فيبر", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" }
 ];
 
 (function () {
