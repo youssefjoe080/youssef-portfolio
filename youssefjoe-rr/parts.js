@@ -45,7 +45,8 @@ const PARTS = [
   { code: 240, name: "كتل مقابض (مفاتيح الجادون) فيجوري VR300", category: "كهربا", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 249, name: "عصاية غيارات فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 600, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 257, name: "اسطوانة فرامل خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 258, name: "اسطوانة فرامل أمامي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 258, name: "اسطوانة فرامل أمامي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 274, name: "خوذة LS2 Rapid II", category: "خوذ", fits: "فول فيس — يونيفرسال", location: "", price: 3100, qty: 100, status: "in", photos: 4, notes: "شهادة أمان ECE 22.06 · زجاج ضد الخدش وUV · جاهزة لإنتركوم Cardo — اسأل على المقاسات" }
 ];
 
 (function () {
