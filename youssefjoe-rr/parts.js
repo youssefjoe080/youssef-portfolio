@@ -35,7 +35,8 @@ const PARTS = [
   { code: 263, name: "ترس خلفي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 500, qty: 100, status: "in", photos: 1, notes: "" },
   { code: 264, name: "ترس أمامي فيجوري VR300", category: "عجل وفرامل", fits: "Vigory VR300", location: "", price: 300, qty: 100, status: "in", photos: 0, notes: "" },
   { code: 265, name: "كربراتير فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 1400, qty: 100, status: "in", photos: 1, notes: "" },
-  { code: 266, name: "كرونة كاملة بالديسك فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 4000, qty: 100, status: "in", photos: 1, notes: "" }
+  { code: 266, name: "كرونة كاملة بالديسك فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 4000, qty: 100, status: "in", photos: 1, notes: "" },
+  { code: 267, name: "ترسين اتزان فيجوري VR300", category: "موتور", fits: "Vigory VR300", location: "", price: 1500, qty: 100, status: "in", photos: 1, notes: "" }
 ];
 
 (function () {
