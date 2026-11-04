@@ -63,7 +63,8 @@ const PARTS = [
   { code: 297, name: "جنزير D.I.D 525 HV3 دهبي (X-Ring)", category: "عجل وفرامل", fits: "بايكات 400cc – 1000cc بجنزير 525", location: "", price: 1400, qty: 100, status: "in", photos: 1, notes: "D.I.D ياباني · X-Ring · بيكمل مع الترسين كود 294 و295" },
   { code: 298, name: "هاند جارد كاربون (حماية مقابض)", category: "إكسسوارات", fits: "يونيفرسال — بيتركب في طرف الجادون", location: "", price: 600, qty: 100, status: "in", photos: 1, notes: "شكل كاربون · متاح أحمر أو فضي — اسأل على المتاح" },
   { code: 299, name: "حامل نمرة تعديل (ألومنيوم)", category: "إكسسوارات", fits: "يونيفرسال — بيتركب تحت الديل", location: "", price: 600, qty: 100, status: "in", photos: 1, notes: "ألومنيوم · زاوية قابلة للتعديل · اسأل على الألوان المتاحة" },
-  { code: 300, name: "لمبة LED أمامي للفانوس (طقم)", category: "كهربا", fits: "يونيفرسال — اسأل على نوع الكلوب", location: "", price: 500, qty: 100, status: "in", photos: 2, notes: "إضاءة 3500 لومن · عمر 30,000 ساعة · معاها حلقات تركيب" }
+  { code: 300, name: "لمبة LED أمامي للفانوس (طقم)", category: "كهربا", fits: "يونيفرسال — اسأل على نوع الكلوب", location: "", price: 500, qty: 100, status: "in", photos: 2, notes: "إضاءة 3500 لومن · عمر 30,000 ساعة · معاها حلقات تركيب" },
+  { code: 301, name: "كوفر رادياتير هورنت 600 (ستانلس)", category: "إكسسوارات", fits: "Honda Hornet 600", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "حماية للرادياتير من الطوب والحصى · مكتوب عليه Hornet 600" }
 ];
 
 (function () {
