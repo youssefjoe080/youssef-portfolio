@@ -66,7 +66,8 @@ const PARTS = [
   { code: 300, name: "لمبة LED أمامي للفانوس (طقم)", category: "كهربا", fits: "يونيفرسال — اسأل على نوع الكلوب", location: "", price: 500, qty: 100, status: "in", photos: 2, notes: "إضاءة 3500 لومن · عمر 30,000 ساعة · معاها حلقات تركيب" },
   { code: 301, name: "كوفر رادياتير هورنت 600 (ستانلس)", category: "إكسسوارات", fits: "Honda Hornet 600", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "حماية للرادياتير من الطوب والحصى · مكتوب عليه Hornet 600" },
   { code: 302, name: "اسطوانة فرامل أمامي MTX (فلوتنج)", category: "عجل وفرامل", fits: "Honda CBR900RR 919", location: "", price: 7000, qty: 100, status: "in", photos: 2, notes: "MTX · ديسك فلوتنج CNC · اسأل لو السعر للفردة ولا للجوز" },
-  { code: 303, name: "جوانتي SUOMY SU-18", category: "إكسسوارات", fits: "مقاس M في الصورة — اسأل على باقي المقاسات", location: "", price: 1000, qty: 100, status: "in", photos: 1, notes: "جوانتي موتوسيكل بحماية للصوابع والكف" }
+  { code: 303, name: "جوانتي SUOMY SU-18", category: "إكسسوارات", fits: "مقاس M في الصورة — اسأل على باقي المقاسات", location: "", price: 1000, qty: 100, status: "in", photos: 1, notes: "جوانتي موتوسيكل بحماية للصوابع والكف" },
+  { code: 304, name: "جوانتي موتوسيكل بحماية (موديلات)", category: "إكسسوارات", fits: "اسأل على المقاسات المتاحة", location: "", price: 800, qty: 100, status: "in", photos: 3, notes: "حماية للمفاصل والصوابع · كف مانع للانزلاق · موديلين زي الصور — اسأل على المتاح" }
 ];
 
 (function () {
