@@ -71,7 +71,8 @@ const PARTS = [
   { code: 305, name: "جوانتي كاربون (أسود × أحمر)", category: "إكسسوارات", fits: "اسأل على المقاسات المتاحة", location: "", price: 900, qty: 100, status: "in", photos: 1, notes: "حماية مفاصل شكل كاربون · حماية للصوابع · كف مانع للانزلاق" },
   { code: 306, name: "مقبض تانك تعديل (حلقة تانك)", category: "إكسسوارات", fits: "بيتركب على غطا التانك — اسأل على التوافق", location: "", price: 900, qty: 100, status: "in", photos: 1, notes: "مقبض للراكب اللي ورا · بيتركب على غطا البنزين" },
   { code: 307, name: "علبة شكمان شكل SC Project — سليب أون", category: "شكمانات", fits: "يونيفرسال — اسأل على مقاس الوصلة", location: "", price: 2000, qty: 100, status: "in", photos: 1, notes: "تيتانيوم مطفي · طرف أسود · حامل تثبيت معاها" },
-  { code: 308, name: "علبة شكمان شكل Yoshimura — سليب أون", category: "شكمانات", fits: "يونيفرسال — اسأل على مقاس الوصلة", location: "", price: 1900, qty: 100, status: "in", photos: 2, notes: "ستانلس مطفي · صوت قوي · حامل تثبيت معاها" }
+  { code: 308, name: "علبة شكمان شكل Yoshimura — سليب أون", category: "شكمانات", fits: "يونيفرسال — اسأل على مقاس الوصلة", location: "", price: 1900, qty: 100, status: "in", photos: 2, notes: "ستانلس مطفي · صوت قوي · حامل تثبيت معاها" },
+  { code: 309, name: "جوان وش سلندر Honda CBR600RR", category: "موتور", fits: "Honda CBR600RR", location: "", price: 1600, qty: 100, status: "in", photos: 1, notes: "جوان معدن (MLS) · اسأل على سنة الموديل المناسبة" }
 ];
 
 (function () {
@@ -106,6 +107,7 @@ const PARTS = [
     { key: "gsr600", label: "سوزوكي GSR600", test: (f) => /gsr|suzuki/i.test(f) },
     { key: "hornet", label: "هوندا هورنت 600", test: (f) => /hornet|هورنت/i.test(f) },
     { key: "cbr1000", label: "هوندا CBR1000RR", test: (f) => /cbr1000/i.test(f) },
+    { key: "cbr600", label: "هوندا CBR600RR", test: (f) => /cbr600/i.test(f) },
     { key: "uni", label: "يونيفرسال (أي بايك)", test: () => true },
   ];
   const bikeOf = (p) => BIKES.find((b) => b.test(p.fits || "")).key;
@@ -177,7 +179,7 @@ const PARTS = [
   function shortFits(p) {
     const f = p.fits || "";
     if (p._bike === "vr300") return "فيجوري VR300";
-    if (p._bike === "gsr600" || p._bike === "hornet" || p._bike === "cbr1000") return f;
+    if (p._bike === "gsr600" || p._bike === "hornet" || p._bike === "cbr1000" || p._bike === "cbr600") return f;
     return f.split("—")[0].trim() || "يونيفرسال";
   }
 
