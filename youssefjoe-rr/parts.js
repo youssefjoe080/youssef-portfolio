@@ -60,7 +60,8 @@ const PARTS = [
   { code: 294, name: "ترس خلفي 525 — 43 سنة", category: "عجل وفرامل", fits: "جنزير 525 — اسأل على التوافق مع بايكك", location: "", price: 900, qty: 100, status: "in", photos: 1, notes: "مقاس 525 · 43 سنة (43T)" },
   { code: 295, name: "ترس أمامي 16 سنة", category: "عجل وفرامل", fits: "جنزير 525 — اسأل على التوافق مع بايكك", location: "", price: 700, qty: 100, status: "in", photos: 1, notes: "16 سنة (16T) · بيكمل مع الترس الخلفي كود 294" },
   { code: 296, name: "جوان وش سلندر Honda CBR1000RR (2008–2013) — أصلي", category: "موتور", fits: "Honda CBR1000RR 2008–2013", location: "", price: 2800, qty: 100, status: "in", photos: 1, notes: "قطعة هوندا أصلية — صنع في اليابان · رقم القطعة 12251-MFL-003" },
-  { code: 297, name: "جنزير D.I.D 525 HV3 دهبي (X-Ring)", category: "عجل وفرامل", fits: "بايكات 400cc – 1000cc بجنزير 525", location: "", price: 1400, qty: 100, status: "in", photos: 1, notes: "D.I.D ياباني · X-Ring · بيكمل مع الترسين كود 294 و295" }
+  { code: 297, name: "جنزير D.I.D 525 HV3 دهبي (X-Ring)", category: "عجل وفرامل", fits: "بايكات 400cc – 1000cc بجنزير 525", location: "", price: 1400, qty: 100, status: "in", photos: 1, notes: "D.I.D ياباني · X-Ring · بيكمل مع الترسين كود 294 و295" },
+  { code: 298, name: "هاند جارد كاربون (حماية مقابض)", category: "إكسسوارات", fits: "يونيفرسال — بيتركب في طرف الجادون", location: "", price: 600, qty: 100, status: "in", photos: 1, notes: "شكل كاربون · متاح أحمر أو فضي — اسأل على المتاح" }
 ];
 
 (function () {
