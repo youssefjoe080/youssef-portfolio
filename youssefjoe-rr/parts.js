@@ -67,7 +67,8 @@ const PARTS = [
   { code: 301, name: "كوفر رادياتير هورنت 600 (ستانلس)", category: "إكسسوارات", fits: "Honda Hornet 600", location: "", price: 800, qty: 100, status: "in", photos: 1, notes: "حماية للرادياتير من الطوب والحصى · مكتوب عليه Hornet 600" },
   { code: 302, name: "اسطوانة فرامل أمامي MTX (فلوتنج)", category: "عجل وفرامل", fits: "Honda CBR900RR 919", location: "", price: 7000, qty: 100, status: "in", photos: 2, notes: "MTX · ديسك فلوتنج CNC · اسأل لو السعر للفردة ولا للجوز" },
   { code: 303, name: "جوانتي SUOMY SU-18", category: "إكسسوارات", fits: "مقاس M في الصورة — اسأل على باقي المقاسات", location: "", price: 1000, qty: 100, status: "in", photos: 1, notes: "جوانتي موتوسيكل بحماية للصوابع والكف" },
-  { code: 304, name: "جوانتي موتوسيكل بحماية (موديلات)", category: "إكسسوارات", fits: "اسأل على المقاسات المتاحة", location: "", price: 800, qty: 100, status: "in", photos: 3, notes: "حماية للمفاصل والصوابع · كف مانع للانزلاق · موديلين زي الصور — اسأل على المتاح" }
+  { code: 304, name: "جوانتي موتوسيكل بحماية (موديلات)", category: "إكسسوارات", fits: "اسأل على المقاسات المتاحة", location: "", price: 800, qty: 100, status: "in", photos: 3, notes: "حماية للمفاصل والصوابع · كف مانع للانزلاق · موديلين زي الصور — اسأل على المتاح" },
+  { code: 305, name: "جوانتي كاربون (أسود × أحمر)", category: "إكسسوارات", fits: "اسأل على المقاسات المتاحة", location: "", price: 900, qty: 100, status: "in", photos: 1, notes: "حماية مفاصل شكل كاربون · حماية للصوابع · كف مانع للانزلاق" }
 ];
 
 (function () {
