@@ -58,7 +58,8 @@ const PARTS = [
   { code: 283, name: "تيل فرامل SRS", category: "عجل وفرامل", fits: "مقاسات مختلفة — ابعت موديل بايكك", location: "", price: 450, qty: 100, status: "in", photos: 2, notes: "شهادة E6 · مقاسات كتير (الكود مكتوب على الكرتونة) — ابعتلي موديل بايكك وأقولك المقاس" },
   { code: 284, name: "تيل فرامل LETU", category: "عجل وفرامل", fits: "مقاسات مختلفة — ابعت موديل بايكك", location: "", price: 450, qty: 100, status: "in", photos: 1, notes: "جوز تيل في الكرتونة · ابعتلي موديل بايكك وأقولك المقاس المناسب" },
   { code: 294, name: "ترس خلفي 525 — 43 سنة", category: "عجل وفرامل", fits: "جنزير 525 — اسأل على التوافق مع بايكك", location: "", price: 900, qty: 100, status: "in", photos: 1, notes: "مقاس 525 · 43 سنة (43T)" },
-  { code: 295, name: "ترس أمامي 16 سنة", category: "عجل وفرامل", fits: "جنزير 525 — اسأل على التوافق مع بايكك", location: "", price: 700, qty: 100, status: "in", photos: 1, notes: "16 سنة (16T) · بيكمل مع الترس الخلفي كود 294" }
+  { code: 295, name: "ترس أمامي 16 سنة", category: "عجل وفرامل", fits: "جنزير 525 — اسأل على التوافق مع بايكك", location: "", price: 700, qty: 100, status: "in", photos: 1, notes: "16 سنة (16T) · بيكمل مع الترس الخلفي كود 294" },
+  { code: 297, name: "جنزير D.I.D 525 HV3 دهبي (X-Ring)", category: "عجل وفرامل", fits: "بايكات 400cc – 1000cc بجنزير 525", location: "", price: 1400, qty: 100, status: "in", photos: 1, notes: "D.I.D ياباني · X-Ring · بيكمل مع الترسين كود 294 و295" }
 ];
 
 (function () {
