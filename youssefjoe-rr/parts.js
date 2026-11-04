@@ -97,6 +97,8 @@ const PARTS = [
   const BIKES = [
     { key: "vr300", label: "فيجوري VR300", test: (f) => /vigory|فيجوري/i.test(f) },
     { key: "gsr600", label: "سوزوكي GSR600", test: (f) => /gsr|suzuki/i.test(f) },
+    { key: "hornet", label: "هوندا هورنت 600", test: (f) => /hornet|هورنت/i.test(f) },
+    { key: "cbr1000", label: "هوندا CBR1000RR", test: (f) => /cbr1000/i.test(f) },
     { key: "uni", label: "يونيفرسال (أي بايك)", test: () => true },
   ];
   const bikeOf = (p) => BIKES.find((b) => b.test(p.fits || "")).key;
@@ -168,7 +170,7 @@ const PARTS = [
   function shortFits(p) {
     const f = p.fits || "";
     if (p._bike === "vr300") return "فيجوري VR300";
-    if (p._bike === "gsr600") return f;
+    if (p._bike === "gsr600" || p._bike === "hornet" || p._bike === "cbr1000") return f;
     return f.split("—")[0].trim() || "يونيفرسال";
   }
 
