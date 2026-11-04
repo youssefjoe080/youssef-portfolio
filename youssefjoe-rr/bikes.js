@@ -68,8 +68,6 @@ const BIKES = [
     features: ["طنابير أمامي تعديل", "علبة SC Project", "كلبرات فرامل تعديل", "كاوتش أمامي 80% / خلفي 70%", "رش ديل + ملحوظة بسيطة في التنك"] },
 
 
-  { code: 53, brand: "BMW", model: "S1000R", year: null, type: "naked", cc: 1000, km: "32,000", location: "—", license: "رخصة 3 سنين", price: 520, status: "available",
-    features: ["صيانات توكيل", "فابريكا بالكامل", "كل الصيانات معمولة", "مش محتاج جنيه مصروف"] },
 
 
   { code: 55, brand: "Honda", model: "Hornet 600", year: 2008, type: "naked", cc: 600, km: "—", location: "سوهاج", license: "منتهية — مرور الإسكندرية", price: 225, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
