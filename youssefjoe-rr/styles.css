@@ -656,3 +656,14 @@ footer .container { display: flex; justify-content: space-between; flex-wrap: wr
   .sale-inner { gap: 8px; padding: 8px 10px; font-size: .85rem; }
   .sale-btn { padding: 6px 12px; }
 }
+
+/* ===== SELL PAUSED (إيقاف مؤقت) — امسح البلوك ده كله عشان ترجّع "بيع بايكك" ===== */
+a[href="sell.html"] { display: none !important; }
+.doors { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) {
+  .doors { grid-template-columns: 1fr 1fr; }
+  .doors .door.gold { grid-column: 1 / -1; }
+  .tabbar { grid-template-columns: repeat(4, 1fr); }
+}
+.sell-paused { max-width: 560px; margin: 0 auto; text-align: center; }
+.sell-paused .btn { margin: 6px; }
