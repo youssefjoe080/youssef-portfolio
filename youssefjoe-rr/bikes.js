@@ -29,9 +29,6 @@ const BIKES = [
   { code: 12, brand: "Honda", model: "CB650R", year: 2023, type: "naked", cc: 650, km: "24,000", location: "بورسعيد", license: "—", price: 400, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["عداد TFT ديجيتال", "ABS + Traction Control", "Quick Shifter", "Full System Akrapovic", "Camera System", "دواسات Arashi", "Engine Guard كامل + سلايدرات", "مقابض وفرامل أوريجنال"] },
 
-  { code: 22, brand: "Honda", model: "CBR 600 F4i", year: 2002, type: "sport", cc: 600, km: "—", location: "6 أكتوبر", license: "أول رخصة من الإفراج", price: 235, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
-    features: ["ستوك بالكامل بحالة المصنع", "الموتور ما اتحلش غير وش الكهربا للصيانة", "بطارية + رادياتير + مياه جديدة", "لمبات LED", "علبة تعديل: هادية على الـLow وصوت رعد على الـHigh RPM", "متسرفز بالكامل — مش محتاج مصاريف"] },
-
   { code: 24, brand: "Honda", model: "Steed 400", year: 1995, type: "cruiser", cc: 400, km: "—", location: "سوهاج", license: "منتهية — مرور الجيزة", price: 53, status: "available",
     features: ["محتاج عمرة", "لقطة للي فاهم وعايز يعملها على نضافة"] },
 
