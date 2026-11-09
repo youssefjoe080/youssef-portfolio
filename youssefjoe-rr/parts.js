@@ -4,6 +4,7 @@
 const PARTS = [
   { code: 156, name: "شكمان Baby King أصلي", category: "شكمانات", fits: "Suzuki GSR600 (Baby King)", location: "الإسكندرية", price: 8500, qty: 1, status: "in", photos: 5, notes: "" },
   { code: 204, name: "شكمان شكل Akrapovič — سليب أون", category: "شكمانات", fits: "يونيفرسال — اسأل على مقاس الوصلة", location: "", price: 1500, qty: 1, status: "in", photos: 1, notes: "طرف كاربون + حامل تثبيت" },
+  { code: 332, name: "خوذة LS2 Rapid III", category: "خوذ", fits: "فول فيس — يونيفرسال", location: "", price: 3500, qty: 100, status: "in", photos: 4, notes: "شهادة أمان ECE 22.06 · خامة HPTT خفيفة وقوية · زجاج ضد الخدش وUV · مناسبة للنضارة · بطانة مريحة ضد الحساسية · تهوية عالية · جاهزة لـ Pinlock — اسأل على المقاسات" },
   { code: 274, name: "خوذة LS2 Rapid II", category: "خوذ", fits: "فول فيس — يونيفرسال", location: "", price: 3100, qty: 100, status: "in", photos: 4, notes: "شهادة أمان ECE 22.06 · زجاج ضد الخدش وUV · جاهزة لإنتركوم Cardo — اسأل على المقاسات" },
   { code: 275, name: "خوذة LS2 Cosmos — زجاج سموكي", category: "خوذ", fits: "فول فيس — يونيفرسال", location: "", price: 3800, qty: 100, status: "in", photos: 4, notes: "شهادة أمان ECE 22.06 · سبويلر خلفي · المقاس في الصور XL — اسأل على باقي المقاسات" },
   { code: 276, name: "خوذة MRC فليب أب (الدقن بتتفتح)", category: "خوذ", fits: "فول فيس / مودولار — يونيفرسال", location: "", price: 2800, qty: 100, status: "in", photos: 8, notes: "شهادة أمان ECE 22.06 · لونين: أبيض×موف وأبيض×أحمر×أصفر · زجاج شمس داخلي — اسأل على المقاسات" },
