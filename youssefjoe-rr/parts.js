@@ -4,6 +4,7 @@
 const PARTS = [
   { code: 156, name: "شكمان Baby King أصلي", category: "شكمانات", fits: "Suzuki GSR600 (Baby King)", location: "الإسكندرية", price: 8500, qty: 1, status: "in", photos: 5, notes: "" },
   { code: 204, name: "شكمان شكل Akrapovič — سليب أون", category: "شكمانات", fits: "يونيفرسال — اسأل على مقاس الوصلة", location: "", price: 1500, qty: 1, status: "in", photos: 1, notes: "طرف كاربون + حامل تثبيت" },
+  { code: 345, name: "بطاريات MOTOBATT — جل و AGM", category: "كهربا", fits: "مقاسات لمعظم الموتوسيكلات — اسأل على مقاس بايكك", location: "", price: 1300, priceMax: 4100, qty: 100, status: "in", photos: 6, notes: "موديلات متاحة: MTX7A · MTX9A (جل) · MB7BB · MBTX9U · MBT14B4 (AGM) · جاهزة ومقفولة مش محتاجة مية · السعر حسب الموديل — ابعت موديل بايكك ونقولك المناسب · ومتاح كمان جمب ستارتر MBJ10000 بمنفاخ كاوتش" },
   { code: 344, name: "جوانتي LS2 كاربون — جلد وشبك", category: "إكسسوارات", fits: "يونيفرسال", location: "", price: 1800, qty: 100, status: "in", photos: 1, notes: "حماية مفاصل كاربون فايبر · جلد مخرّم في الكف والصوابع · قماش شبك مهوّي · خطوط عاكسة للإضاءة بالليل · اسأل على المقاسات" },
   { code: 343, name: "جوانتي LS2 جلد — زيتي × كحلي", category: "إكسسوارات", fits: "يونيفرسال", location: "", price: 3000, qty: 100, status: "in", photos: 1, notes: "جلد طبيعي مخرّم للتهوية · حماية مفاصل مبطّنة · صوابع قماش جينز وشبك · قفل فيلكرو · اسأل على المقاسات" },
   { code: 342, name: "جوانتي LS2 — حماية مفاصل مخفية", category: "إكسسوارات", fits: "يونيفرسال", location: "", price: 1400, qty: 100, status: "in", photos: 1, notes: "حماية مفاصل مبطّنة جوه القماش · شكل كاجوال ينفع للشارع · قفل فيلكرو · اسأل على المقاسات" },
@@ -139,7 +140,7 @@ const PARTS = [
     tr.innerHTML = Array.from({ length: p.photos }, (_, i) => `<div class="pv-slide"><img src="${src(p, i + 1)}" alt="${esc(p.name)}" loading="lazy" /></div>`).join("");
     viewer.querySelector(".pv-title").textContent = `#${p.code} — ${p.name}`;
     viewer.querySelector(".pv-n").textContent = `1 / ${p.photos}`;
-    viewer.querySelector(".pv-cta").innerHTML = `<b>${p.price ? fmt(p.price) + " ج.م" : ""}</b><a class="btn btn-wa" target="_blank" rel="noopener" href="${wa(`السلام عليكم، عايز قطعة غيار كود ${p.code} — ${p.name}`)}">${WA_ICON} اطلبها على واتساب</a>`;
+    viewer.querySelector(".pv-cta").innerHTML = `<b>${p.price ? (p.priceMax ? "من " + fmt(p.price) + " لـ " + fmt(p.priceMax) : fmt(p.price)) + " ج.م" : ""}</b><a class="btn btn-wa" target="_blank" rel="noopener" href="${wa(`السلام عليكم، عايز قطعة غيار كود ${p.code} — ${p.name}`)}">${WA_ICON} اطلبها على واتساب</a>`;
     viewer.classList.add("open");
     document.body.style.overflow = "hidden";
     tr.scrollLeft = 0;
@@ -164,7 +165,7 @@ const PARTS = [
       <div class="part-fit">🏍️ ${esc(shortFits(p))}${p.location ? ` · 📍 ${esc(p.location)}` : ""}</div>
       ${p.notes ? `<p class="part-notes">${esc(p.notes)}</p>` : ""}
       <div class="part-foot">
-        <div class="price">${p.price ? fmt(p.price) + "<small>ج.م</small>" : "<small>السعر على واتساب</small>"}</div>
+        <div class="price">${p.price ? (p.priceMax ? "<small>من</small> " + fmt(p.price) + "–" + fmt(p.priceMax) : fmt(p.price)) + "<small>ج.م</small>" : "<small>السعر على واتساب</small>"}</div>
         <a class="part-buy" target="_blank" rel="noopener" aria-label="اطلب ${esc(p.name)} على واتساب" href="${wa(`السلام عليكم، عايز قطعة غيار كود ${p.code} — ${p.name}`)}">${WA_ICON}<span>${p.status === "out" ? "اسأل" : "اطلب"}</span></a>
       </div>`;
     el.appendChild(body);
