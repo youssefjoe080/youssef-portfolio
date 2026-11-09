@@ -4,6 +4,7 @@
 const PARTS = [
   { code: 156, name: "شكمان Baby King أصلي", category: "شكمانات", fits: "Suzuki GSR600 (Baby King)", location: "الإسكندرية", price: 8500, qty: 1, status: "in", photos: 5, notes: "" },
   { code: 204, name: "شكمان شكل Akrapovič — سليب أون", category: "شكمانات", fits: "يونيفرسال — اسأل على مقاس الوصلة", location: "", price: 1500, qty: 1, status: "in", photos: 1, notes: "طرف كاربون + حامل تثبيت" },
+  { code: 342, name: "جوانتي LS2 — حماية مفاصل مخفية", category: "إكسسوارات", fits: "يونيفرسال", location: "", price: 1400, qty: 100, status: "in", photos: 1, notes: "حماية مفاصل مبطّنة جوه القماش · شكل كاجوال ينفع للشارع · قفل فيلكرو · اسأل على المقاسات" },
   { code: 341, name: "جوانتي LS2 صيفي — بحماية مفاصل", category: "إكسسوارات", fits: "يونيفرسال", location: "", price: 1500, qty: 100, status: "in", photos: 1, notes: "شهادة CE · حماية صلبة للمفاصل · قماش شبك مهوّي للصيف · المقاس في الصورة XL — اسأل على باقي المقاسات" },
   { code: 340, name: "ماسك خوذة (بالاكلافا)", category: "إكسسوارات", fits: "تحت أي خوذة — يونيفرسال", location: "", price: 400, qty: 100, status: "in", photos: 1, notes: "قماش خفيف بيتلبس تحت الخوذة · بيحافظ على نضافة بطانة الخوذة · بيحمي من التراب والهوا والشمس" },
   { code: 338, name: "سماعة بلوتوث للخوذة Y20 Max", category: "إكسسوارات", fits: "أي خوذة — يونيفرسال", location: "", price: 1800, qty: 100, status: "in", photos: 1, notes: "بلوتوث · مكالمات وأغاني · ضد المية والتراب · عزل ضوضاء ذكي · بطارية عمر طويل · إضاءة RGB" },
