@@ -91,8 +91,6 @@ const BIKES = [
   { code: 70, brand: "Honda", model: "Scooter 250cc", year: 2008, type: "scooter", cc: 250, km: "—", location: "—", license: "منتهية", price: 140, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["شكمان وفلتر تعديل", "مرايات تعديل", "كل الصيانة معمولة", "راشة — اللون الأساسي دم غزال"] },
 
-  { code: 71, brand: "Honda", model: "CBR 600 F4i Sport", year: 2001, type: "sport", cc: 600, km: "—", location: "حلوان — 15 مايو", license: "حتى آخر السنة — مرور حدائق الأهرام", price: 225, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
-    features: ["الموتور ما اتحلش مسمار"] },
 
   { code: 72, brand: "Honda", model: "Hornet 600", year: 2009, type: "naked", cc: 600, km: "39,000", location: "الخانكة", license: "3 سنين من الإفراج — مرور قويسنا", price: 350, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["جديدة جدًا", "فابريكا بالكامل", "الموتور ما اتحلش مسمار"] },
