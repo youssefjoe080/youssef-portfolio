@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOOM — متجر لبس</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f2;--ink:#151515;--muted:#777;--card:#fff;--accent:#c8553d;--line:#e8e2d8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Cairo,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:rgba(250,247,242,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.logo{font-weight:900;font-size:24px;letter-spacing:4px}
+nav{display:flex;gap:18px;font-weight:700}
+nav a:hover{color:var(--accent)}
+.cart-btn{background:var(--ink);color:#fff;border:0;border-radius:999px;padding:8px 16px;font:700 14px Cairo;cursor:pointer}
+.hero{padding:70px 20px;text-align:center;background:linear-gradient(135deg,#efe6d8,#f7d9cf)}
+.hero h1{font-size:clamp(32px,7vw,64px);font-weight:900;line-height:1.1}
+.hero p{margin:14px 0 26px;color:#444;font-size:18px}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:12px 28px;border-radius:999px;font-weight:700;border:0;cursor:pointer;font-family:Cairo}
+.filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:30px 16px 10px}
+.filters button{border:1px solid var(--ink);background:none;padding:6px 18px;border-radius:999px;font:700 14px Cairo;cursor:pointer}
+.filters button.on{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;padding:20px;max-width:1200px;margin:auto}
+.card{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid var(--line);transition:transform .2s}
+.card:hover{transform:translateY(-4px)}
+.img{aspect-ratio:3/4;display:grid;place-items:center;font-size:72px}
+.info{padding:14px}
+.info h3{font-size:16px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.price{font-weight:900;color:var(--accent)}
+.add{background:var(--ink);color:#fff;border:0;border-radius:8px;padding:6px 12px;font:700 13px Cairo;cursor:pointer}
+.drawer{position:fixed;top:0;left:0;height:100%;width:min(360px,100%);background:#fff;box-shadow:0 0 40px rgba(0,0,0,.2);transform:translateX(-100%);transition:transform .3s;z-index:20;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.drawer h2{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.drawer h2 button{background:none;border:0;font-size:22px;cursor:pointer}
+.items{flex:1;overflow:auto;padding:10px 20px}
+.item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.item button{background:none;border:0;color:var(--accent);cursor:pointer;font-family:Cairo}
+.total{padding:20px;border-top:1px solid var(--line)}
+.total .btn{width:100%;margin-top:10px}
+footer{text-align:center;padding:40px 20px;color:var(--muted);border-top:1px solid var(--line);margin-top:40px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;transition:transform .3s;z-index:30}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:600px){nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">LOOM</div>
+  <nav><a href="#shop">المتجر</a><a href="#shop">جديد</a><a href="#about">عنّا</a></nav>
+  <button class="cart-btn" onclick="toggleCart()">🛒 السلة (<span id="count">0</span>)</button>
+</header>
+
+<section class="hero">
+  <h1>ستايلك.<br>بسعر يناسبك.</h1>
+  <p>كولكشن الشتا وصل — خصم ٢٠٪ لأول طلب</p>
+  <a href="#shop" class="btn">تسوّق دلوقتي</a>
+</section>
+
+<div class="filters" id="shop"></div>
+<div class="grid" id="grid"></div>
+
+<footer id="about">© 2026 LOOM — موقع تجريبي · شحن لكل المحافظات</footer>
+
+<aside class="drawer" id="drawer">
+  <h2>سلتك <button onclick="toggleCart()">✕</button></h2>
+  <div class="items" id="items"></div>
+  <div class="total">الإجمالي: <b id="total">0</b> ج.م
+    <button class="btn" onclick="checkout()">إتمام الطلب</button>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+const products=[
+  {n:"تيشيرت قطن أساسي",p:350,c:"رجالي",e:"👕",bg:"#e3ecf5"},
+  {n:"هودي أوفر سايز",p:850,c:"رجالي",e:"🧥",bg:"#ece3d6"},
+  {n:"جينز سليم",p:690,c:"رجالي",e:"👖",bg:"#dde3ee"},
+  {n:"فستان صيفي",p:920,c:"حريمي",e:"👗",bg:"#f6dde3"},
+  {n:"بلوزة كتان",p:480,c:"حريمي",e:"👚",bg:"#f2ecd9"},
+  {n:"جاكيت جلد",p:1650,c:"حريمي",e:"🧥",bg:"#e5ddd6"},
+  {n:"كوتشي أبيض",p:1200,c:"إكسسوارات",e:"👟",bg:"#eeeeee"},
+  {n:"كاب",p:250,c:"إكسسوارات",e:"🧢",bg:"#e0eadf"},
+];
+const cats=["الكل",...new Set(products.map(p=>p.c))];
+let cart=[],cat="الكل";
+const $=id=>document.getElementById(id);
+
+function renderFilters(){
+  $("shop").innerHTML=cats.map(c=>`<button class="${c===cat?'on':''}" onclick="setCat('${c}')">${c}</button>`).join("");
+}
+function setCat(c){cat=c;renderFilters();renderGrid()}
+function renderGrid(){
+  $("grid").innerHTML=products.map((p,i)=>({...p,i})).filter(p=>cat==="الكل"||p.c===cat).map(p=>`
+    <div class="card"><div class="img" style="background:${p.bg}">${p.e}</div>
+    <div class="info"><h3>${p.n}</h3><div class="row"><span class="price">${p.p} ج.م</span>
+    <button class="add" onclick="add(${p.i})">أضف للسلة</button></div></div></div>`).join("");
+}
+function add(i){cart.push(products[i]);renderCart();toast("اتضاف للسلة ✓")}
+function remove(i){cart.splice(i,1);renderCart()}
+function renderCart(){
+  $("count").textContent=cart.length;
+  $("items").innerHTML=cart.length?cart.map((p,i)=>`<div class="item"><span>${p.e} ${p.n}<br><small>${p.p} ج.م</small></span><button onclick="remove(${i})">حذف</button></div>`).join(""):"<p style='padding:20px 0;color:#777'>السلة فاضية</p>";
+  $("total").textContent=cart.reduce((s,p)=>s+p.p,0);
+}
+function toggleCart(){$("drawer").classList.toggle("open")}
+function checkout(){if(!cart.length)return toast("السلة فاضية");cart=[];renderCart();toggleCart();toast("تم الطلب بنجاح 🎉 (تجريبي)")}
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800)}
+renderFilters();renderGrid();renderCart();
+</script>
+</body>
+</html>
