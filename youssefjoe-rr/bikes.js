@@ -128,8 +128,6 @@ const BIKES = [
   { code: 103, brand: "Suzuki", model: "GSR 600 (بيبي كينج)", year: 2008, type: "naked", cc: 600, km: "54,000", location: "المنصورة", license: "3 سنين — مرور المنصورة", price: 240, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["الموتور ما اتحلش أي حاجة", "رش الفيبرة اللي تحت الكرسي فقط", "بوكس GIVI + راك", "إسكرينة + سلايدرات + تانك باد", "لسه بالنايلون على الكرسي"] },
 
-  { code: 104, brand: "Honda", model: "VTX 1800 F3", year: 2005, type: "cruiser", cc: 1800, km: "45,000", location: "الشروق / مدينتي", license: "رخصة سنة — مرور الشروق", price: 360, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
-    features: ["الموتور ما اتحلش أي حاجة", "كل الصيانات معمولة", "كرسي تعديل بتسخين وتبريد", "شكمان Cobra", "مقابض ومرايات تعديل", "راشة تغيير لون فقط"] },
 
 
   { code: 106, brand: "Honda", model: "Hornet 600 ABS", year: 2007, type: "naked", cc: 600, km: "75,700", location: "المهندسين", license: "رخصة 3 سنين", price: 300, status: "available",
