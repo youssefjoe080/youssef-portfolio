@@ -20,7 +20,7 @@ const BIKES = [
   { code: 8, brand: "Honda", model: "Hornet 600 Injection", year: 2007, type: "naked", cc: 600, km: "68,000", location: "الشرقية", license: "رخصة 3 سنين — مرور طوخ", price: 210, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["الموتور ما اتحلش مسمار (وش الزيت فقط)", "الفردة الخلفي 80%", "محتاج فردة أمامي فقط"] },
 
-  { code: 9, brand: "Honda", model: "CBR 600RR ABS", year: 2012, type: "sport", cc: 600, km: "49,000", location: "—", license: "الرخصة منتهية", price: 345, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
+  { code: 9, brand: "Honda", model: "CBR 600RR ABS", year: 2012, type: "sport", cc: 600, km: "49,000", location: "—", license: "الرخصة منتهية", price: 345, sale: { off: 55, until: "2026-11-23T21:59:00Z" }, status: "available",
     features: ["فرامل ABS + فايبر ABS", "مغير زيت وفلتر من 100 كم", "صيانة كاملة معمولة", "الموتور ما اتحلش مسمار", "محتاج أولسية مساعد"] },
 
   { code: 11, brand: "Honda", model: "CBR 1000RR", year: 2013, type: "sport", cc: 1000, km: "29,000", location: "—", license: "—", price: 510, status: "available",
