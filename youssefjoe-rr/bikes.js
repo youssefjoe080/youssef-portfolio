@@ -85,7 +85,7 @@ const BIKES = [
   { code: 67, brand: "Honda", model: "CBR900RR Fireblade (919)", year: 1998, type: "sport", cc: 900, km: "—", location: "الزاوية الحمراء", license: "سنتين ونص", price: 135, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["ستاندر ياباني أصلي", "مش راشة حاجة", "مرايات وإشارات تعديل", "كاوتشات جديدة قدام وورا"] },
 
-  { code: 69, brand: "Suzuki", model: "Hayabusa GSX1300R", year: 2014, type: "sport", cc: 1300, km: "29,000", location: "الشيخ زايد", license: "رخصة سنتين — إفراج اليابان", price: 660, status: "available",
+  { code: 69, brand: "Suzuki", model: "Hayabusa GSX1300R", year: 2014, type: "sport", cc: 1300, km: "29,000", location: "الشيخ زايد", license: "رخصة سنتين — إفراج اليابان", price: 660, sale: { off: 60, until: "2026-11-24T21:59:00Z" }, status: "available",
     features: ["Pearl Mira Red — Gen 2", "Full ABS Brembo", "Brembo levers & masters", "مساعد خلفي Öhlins", "Full titanium exhaust", "مرايات وغطاء جنزير كاربون", "Hydraulic steering damper", "حالة نادرة جدًا"] },
 
   { code: 70, brand: "Honda", model: "Scooter 250cc", year: 2008, type: "scooter", cc: 250, km: "—", location: "—", license: "منتهية", price: 140, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
