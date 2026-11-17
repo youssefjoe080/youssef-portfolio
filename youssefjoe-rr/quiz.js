@@ -99,12 +99,12 @@
       } else if (u === "fun") {
         if (b.type === "naked" || b.type === "sport") { d = 8; w = "ممتع في الخروجات والرايدات"; }
       } else if (u === "travel") {
-        if (/Hayabusa|Z1000SX|Burgman|GSX-S1000|CB650R/i.test(b.model)) { d = 16; w = "مريح في السفر والطرق السريعة"; }
+        if (b.type === "touring" || /Hayabusa|Z1000SX|Burgman|GSX-S1000|CB650R/i.test(b.model)) { d = 16; w = "مريح في السفر والطرق السريعة"; }
         else if (b.cc >= 650) { d = 8; w = "قوة كفاية للطرق السريعة"; }
         else if (b.cc <= 400) d = -14;
       } else if (u === "track") {
         if (b.type === "sport") { d = 16; w = "سبورت — مصمم للأداء والسرعة"; }
-        else if (b.type === "scooter" || b.type === "cruiser") d = -30;
+        else if (b.type === "scooter" || b.type === "cruiser" || b.type === "touring") d = -30;
         else d = -4;
         if ((b.year || 0) >= 2008) d += 4;
       }

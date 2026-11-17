@@ -3,7 +3,7 @@
     const MAX_PHOTOS = 8;                 // أقصى عدد صور لكل بايك
     const EXTS = ["jpg", "jpeg", "png", "webp"];
 
-    const TYPES = { all: "الكل", sport: "سبورت", naked: "نيكد", scooter: "سكوتر", cruiser: "كروزر" };
+    const TYPES = { all: "الكل", sport: "سبورت", naked: "نيكد", scooter: "سكوتر", cruiser: "كروزر", touring: "تورينج" };
     const BRAND_AR = { Honda: "هوندا", Kawasaki: "كاواساكي", Suzuki: "سوزوكي", BMW: "بي إم دبليو" };
     const ALIASES = [
       ["هورنت", "hornet"], ["هوندا", "honda"], ["كاواساكي", "kawasaki"], ["كوزاكي", "kawasaki"],
