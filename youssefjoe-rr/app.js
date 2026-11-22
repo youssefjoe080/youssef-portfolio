@@ -200,7 +200,7 @@
     }
     async function shareBike(b) {
       const url = `${location.origin}/b/${b.code}`;
-      const text = `${title(b)} ${b.year || ""} — ${fmt(b.price)} ألف | youssefjoe.rr`;
+      const text = `${title(b)} ${b.year || ""} — ${fmt(b.price)} ألف | YJ`;
       try {
         if (navigator.share) { await navigator.share({ title: text, url }); return; }
         await navigator.clipboard.writeText(url);

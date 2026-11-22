@@ -29,10 +29,10 @@ module.exports = async (req, res) => {
 
   res.end(`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${esc(title)} | youssefjoe.rr</title>
+<title>${esc(title)} | YJ</title>
 <meta name="description" content="${esc(desc)}" />
 <meta property="og:type" content="product" />
-<meta property="og:site_name" content="youssefjoe.rr" />
+<meta property="og:site_name" content="YJ" />
 <meta property="og:title" content="${esc(title)}" />
 <meta property="og:description" content="${esc(desc)}" />
 <meta property="og:image" content="${esc(img)}" />
