@@ -678,3 +678,70 @@ a[href="sell.html"] { display: none !important; }
 }
 .logo .logo-sub { color: var(--muted); font-size: .62rem; font-weight: 700; letter-spacing: 2.5px; }
 @media (max-width: 380px) { .logo .logo-sub { display: none; } }
+
+/* ===== UI v2 (home redesign) ===== */
+/* sale bar: one clean clickable line */
+.sale-bar .sale-inner { color: #fff; gap: 10px; padding: 9px 16px; flex-wrap: nowrap; justify-content: center; }
+.sale-bar .sale-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sale-bar .sale-timer { white-space: nowrap; }
+.sale-bar .sale-go { font-weight: 800; white-space: nowrap; }
+@media (max-width: 520px) {
+  .sale-bar .sale-inner { font-size: .8rem; padding: 8px 12px; gap: 8px; justify-content: space-between; }
+  .sale-bar .sale-go { display: none; }
+  .sale-bar .sale-timer { padding: 3px 9px; font-size: .78rem; }
+}
+
+/* hero: tighter, search-first */
+.hero p.lead { margin: 14px auto 24px; }
+.budget-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin: 16px auto 0; max-width: 640px; }
+.budget-row span { color: var(--muted); font-size: .9rem; font-weight: 700; margin-inline-end: 2px; }
+.budget-row a { border: 1px solid var(--line); background: rgba(255,255,255,.04); border-radius: 999px; padding: 7px 14px; font-weight: 700; font-size: .9rem; direction: ltr; transition: .2s; }
+.budget-row a:hover { border-color: var(--accent); color: #fff; background: rgba(225,29,46,.15); }
+.hero .quiz-cta { margin-top: 22px; }
+.trust { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; color: var(--muted); font-size: .88rem; font-weight: 600; }
+.trust li::marker { content: ""; }
+
+/* section heads for rails */
+.rail-sec { padding-top: 34px !important; padding-bottom: 0 !important; }
+.rail-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.rail-head h2 { font-size: clamp(1.25rem, 3vw, 1.7rem); font-weight: 900; }
+.rail-head a { color: var(--muted); font-weight: 700; font-size: .9rem; white-space: nowrap; }
+.rail-head a:hover { color: #fff; }
+
+/* rails: grid on desktop, swipeable row on phones */
+.rail { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+@media (max-width: 700px) {
+  .rail { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: -16px; padding: 2px 16px 8px; scrollbar-width: none; }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail > .card { flex: 0 0 76%; scroll-snap-align: start; }
+}
+
+/* type tiles */
+.types { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.type-tile { display: flex; flex-direction: column; gap: 4px; padding: 16px; border-radius: 16px; border: 1px solid var(--line); background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.01)); transition: .2s; }
+.type-tile:hover { border-color: var(--accent); transform: translateY(-2px); }
+.type-tile .tt-icon { font-size: 1.6rem; line-height: 1; margin-bottom: 4px; }
+.type-tile b { font-size: 1.1rem; font-weight: 900; }
+.type-tile small { color: var(--muted); font-size: .8rem; }
+@media (max-width: 700px) { .types { grid-template-columns: repeat(2, 1fr); gap: 10px; } .type-tile { padding: 13px; } }
+
+/* parts banner */
+.parts-banner { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 18px; border: 1px solid rgba(234,179,8,.35); background: linear-gradient(120deg, rgba(234,179,8,.14), rgba(234,179,8,.02)); transition: .2s; }
+.parts-banner:hover { transform: translateY(-2px); border-color: rgba(234,179,8,.7); }
+.parts-banner .pb-icon { font-size: 1.8rem; }
+.parts-banner b { display: block; font-size: 1.1rem; font-weight: 900; }
+.parts-banner small { display: block; color: var(--muted); font-size: .85rem; }
+.parts-banner .pb-go { margin-inline-start: auto; font-size: 1.3rem; font-weight: 900; color: #eab308; }
+
+/* header + mobile chrome: less clutter */
+@media (max-width: 900px) {
+  .fab { display: none !important; }
+  .tabbar { grid-template-columns: repeat(5, 1fr) !important; }
+}
+@media (max-width: 520px) {
+  .nav .btn-wa { padding: 9px 11px; }
+  .nav .btn-wa .wa-label { display: none; }
+}
+.tabbar .tab-wa .ti { filter: saturate(1.2); }
+.price .was, .modal-price .was { margin-inline-end: 8px; opacity: .55; font-size: .78em; font-weight: 700; }
+@media (max-width: 700px) { .types .type-tile:last-child:nth-child(odd) { grid-column: 1 / -1; } }

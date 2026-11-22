@@ -232,7 +232,24 @@
 
       // أحدث البايكات (الصفحة الرئيسية)
       const latest = $("#latest");
-      if (latest) [...avail].sort((a, b) => b.code - a.code).slice(0, 6).forEach((b) => latest.appendChild(card(b)));
+      if (latest) [...avail].sort((a, b) => b.code - a.code).slice(0, 8).forEach((b) => latest.appendChild(card(b)));
+      const offers = $("#offers");
+      if (offers) {
+        const list = avail.filter((b) => b.was).sort((a, b) => a.saleUntil - b.saleUntil);
+        if (list.length) { list.forEach((b) => offers.appendChild(card(b))); $("#offersSec").hidden = false; }
+      }
+      const types = $("#types");
+      if (types) {
+        const ICON = { sport: "🏁", naked: "🏍️", cruiser: "🛣️", touring: "🧳", scooter: "🛵" };
+        Object.keys(ICON).forEach((k) => {
+          const list = avail.filter((b) => b.type === k);
+          if (!list.length) return;
+          const a = document.createElement("a");
+          a.className = "type-tile"; a.href = `bikes.html?type=${k}`;
+          a.innerHTML = `<span class="tt-icon">${ICON[k]}</span><b>${TYPES[k]}</b><small>${list.length} بايك · من ${Math.min(...list.map((b) => b.price))} ألف</small>`;
+          types.appendChild(a);
+        });
+      }
 
       // بانر العروض + العداد التنازلي
       const onBikesPage = !!$("#grid");
@@ -240,21 +257,21 @@
       if (saleCount) {
         const bar = document.createElement("div");
         bar.className = "sale-bar";
-        bar.innerHTML = `<div class="container sale-inner">
-          <span class="sale-fire">🔥</span>
-          <span class="sale-text"><b>عرض 48 ساعة</b> — خصم على ${saleCount} بايك</span>
+        bar.innerHTML = `<a class="container sale-inner" href="bikes.html?sale=1">
+          <span class="sale-text">🔥 <b>عروض الأسبوع</b> · ${saleCount} بايك</span>
           <span class="sale-timer">باقي <b data-countdown="${SALE_END}">—</b></span>
-          <a class="btn btn-primary sale-btn" href="bikes.html?sale=1">شوف العروض</a></div>`;
+          <span class="sale-go">شوف ←</span></a>`;
         const nav = document.querySelector("header.nav");
         if (nav) nav.after(bar);
-        if (onBikesPage) bar.querySelector(".sale-btn").onclick = (e) => { e.preventDefault(); toggleSale(true); $("#bikes").scrollIntoView({ behavior: "smooth" }); };
+        if (onBikesPage) bar.querySelector(".sale-inner").onclick = (e) => { e.preventDefault(); toggleSale(true); $("#bikes").scrollIntoView({ behavior: "smooth" }); };
       }
       const pad = (n) => String(n).padStart(2, "0");
       const tick = () => document.querySelectorAll("[data-countdown]").forEach((el) => {
         const ms = +el.dataset.countdown - Date.now();
         if (ms <= 0) { el.textContent = "انتهى العرض"; return; }
-        const h = Math.floor(ms / 3600000), m = Math.floor(ms / 60000) % 60, sec = Math.floor(ms / 1000) % 60;
-        el.textContent = `${pad(h)}:${pad(m)}:${pad(sec)}`;
+        const d = Math.floor(ms / 86400000), h = Math.floor(ms / 3600000) % 24, m = Math.floor(ms / 60000) % 60, sec = Math.floor(ms / 1000) % 60;
+        el.style.direction = d >= 1 ? "rtl" : "ltr";
+        el.textContent = d >= 1 ? `${d === 1 ? "يوم" : d === 2 ? "يومين" : d <= 10 ? d + " أيام" : d + " يوم"} و ${h} ساعة` : `${pad(h)}:${pad(m)}:${pad(sec)}`;
       });
       tick(); setInterval(tick, 1000);
 
@@ -280,6 +297,16 @@
         chips.appendChild(c);
       });
 
+      const params = new URLSearchParams(location.search);
+      const pt = params.get("type");
+      if (pt && TYPES[pt]) { state.type = pt; chips.querySelectorAll(".chip:not(.chip-sale)").forEach((x) => x.classList.toggle("active", x.textContent === TYPES[pt])); }
+      const pb = params.get("budget");
+      if (pb && /^\d+-\d+$/.test(pb)) {
+        state.budget = pb;
+        const bs = $("#budget");
+        if (![...bs.options].some((o) => o.value === pb)) { const [lo, hi] = pb.split("-"); bs.add(new Option(+hi > 9999 ? `فوق ${lo} ألف` : `${lo} — ${hi} ألف`, pb)); }
+        bs.value = pb;
+      }
       const brandSel = $("#brand");
       brandSel.innerHTML = `<option value="">كل الماركات</option>` +
         [...new Set(bikes.map((b) => b.brand))].map((b) => `<option value="${b}">${b}</option>`).join("");
