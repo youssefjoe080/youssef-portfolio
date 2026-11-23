@@ -1,5 +1,5 @@
     // ====== الإعدادات ======
-    const WHATSAPP = "201065173490";      // رقم الواتساب
+    const WHATSAPP = "201041322971";      // رقم الواتساب
     const MAX_PHOTOS = 8;                 // أقصى عدد صور لكل بايك
     const EXTS = ["jpg", "jpeg", "png", "webp"];
 
