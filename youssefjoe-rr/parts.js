@@ -87,7 +87,18 @@ const PARTS = [
   const ICON = `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M40 10a12 12 0 0 0-11 16L12 43a5 5 0 0 0 7 7l17-17a12 12 0 0 0 16-11l-7 7-6-2-2-6 7-7a12 12 0 0 0-4-4z"/></svg>`;
   const WA_ICON = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>`;
 
-  const parts = PARTS.filter((p) => p && p.name).map((p) => ({ ...p, _bike: bikeOf(p), _hay: norm([p.code, p.name, p.category, p.fits, p.location, p.notes].join(" ")) }));
+  // عرض على قسم كامل لفترة محدودة — بيتلغي لوحده لما الوقت يخلص
+  const CAT_SALE = { cat: "سيفتي", pct: 10, until: "2026-11-26T21:59:00Z" };
+  const saleOn = Date.now() < Date.parse(CAT_SALE.until);
+  const parts = PARTS.filter((p) => p && p.name).map((p) => {
+    const q = { ...p, _bike: bikeOf(p), _hay: norm([p.code, p.name, p.category, p.fits, p.location, p.notes].join(" ")) };
+    if (saleOn && p.category === CAT_SALE.cat && p.price) {
+      const cut = (v) => Math.round(v * (1 - CAT_SALE.pct / 100) / 50) * 50;
+      q.was = p.price; q.price = cut(p.price);
+      if (p.priceMax) { q.wasMax = p.priceMax; q.priceMax = cut(p.priceMax); }
+    }
+    return q;
+  });
   const params = new URLSearchParams(location.search);
   const state = {
     q: params.get("q") || "",
@@ -98,11 +109,26 @@ const PARTS = [
 
   const src = (p, i) => `images/parts/${p.code}-${i}.jpg`;
 
+  if (saleOn) {
+    const bn = document.createElement("a");
+    bn.className = "cat-sale";
+    bn.href = "?cat=" + encodeURIComponent(CAT_SALE.cat);
+    bn.innerHTML = `<span>🛡️ <b>خصم ${CAT_SALE.pct}% على كل السيفتي</b> · خوذ وجوانتيات وماسكات</span><span class="cs-timer">باقي <b id="csLeft">—</b></span>`;
+    root.parentNode.insertBefore(bn, root);
+    const left = () => {
+      const ms = Date.parse(CAT_SALE.until) - Date.now();
+      if (ms <= 0) { bn.remove(); return; }
+      const d = Math.floor(ms / 86400000), h = Math.floor(ms / 3600000) % 24, m = Math.floor(ms / 60000) % 60;
+      document.getElementById("csLeft").textContent = d ? `${d === 1 ? "يوم" : "يومين"} و ${h} ساعة` : `${h} ساعة و ${m} دقيقة`;
+    };
+    left(); setInterval(left, 30000);
+  }
+
   function media(p) {
     const box = document.createElement("div");
     box.className = "part-media";
     const last = p.status === "in" && p.qty === 1;
-    box.innerHTML = `<span class="pill pill-code">#${p.code}</span>${last ? `<span class="part-flag">آخر قطعة</span>` : p.status === "out" ? `<span class="part-flag out">خلصت</span>` : p.status === "order" ? `<span class="part-flag order">تحت الطلب</span>` : ""}<div class="part-ph">${ICON}<small>${esc(p.category || "قطعة غيار")}</small></div>`;
+    box.innerHTML = `<span class="pill pill-code">#${p.code}</span>${p.was ? `<span class="part-sale">🔥 خصم ${CAT_SALE.pct}%</span>` : ""}${last ? `<span class="part-flag">آخر قطعة</span>` : p.status === "out" ? `<span class="part-flag out">خلصت</span>` : p.status === "order" ? `<span class="part-flag order">تحت الطلب</span>` : ""}<div class="part-ph">${ICON}<small>${esc(p.category || "قطعة غيار")}</small></div>`;
     if (p.photos > 0) {
       const img = new Image();
       img.alt = p.name;
@@ -141,7 +167,7 @@ const PARTS = [
     tr.innerHTML = Array.from({ length: p.photos }, (_, i) => `<div class="pv-slide"><img src="${src(p, i + 1)}" alt="${esc(p.name)}" loading="lazy" /></div>`).join("");
     viewer.querySelector(".pv-title").textContent = `#${p.code} — ${p.name}`;
     viewer.querySelector(".pv-n").textContent = `1 / ${p.photos}`;
-    viewer.querySelector(".pv-cta").innerHTML = `<b>${p.price ? (p.priceMax ? "من " + fmt(p.price) + " لـ " + fmt(p.priceMax) : fmt(p.price)) + " ج.م" : ""}</b><a class="btn btn-wa" target="_blank" rel="noopener" href="${wa(`السلام عليكم، عايز قطعة غيار كود ${p.code} — ${p.name}`)}">${WA_ICON} اطلبها على واتساب</a>`;
+    viewer.querySelector(".pv-cta").innerHTML = `<b>${p.was ? `<s class="was">${fmt(p.was)}</s> ` : ""}${p.price ? (p.priceMax ? "من " + fmt(p.price) + " لـ " + fmt(p.priceMax) : fmt(p.price)) + " ج.م" : ""}</b><a class="btn btn-wa" target="_blank" rel="noopener" href="${wa(`السلام عليكم، عايز قطعة غيار كود ${p.code} — ${p.name}`)}">${WA_ICON} اطلبها على واتساب</a>`;
     viewer.classList.add("open");
     document.body.style.overflow = "hidden";
     tr.scrollLeft = 0;
@@ -166,7 +192,7 @@ const PARTS = [
       <div class="part-fit">🏍️ ${esc(shortFits(p))}${p.location ? ` · 📍 ${esc(p.location)}` : ""}</div>
       ${p.notes ? `<p class="part-notes">${esc(p.notes)}</p>` : ""}
       <div class="part-foot">
-        <div class="price">${p.price ? (p.priceMax ? "<small>من</small> " + fmt(p.price) + "–" + fmt(p.priceMax) : fmt(p.price)) + "<small>ج.م</small>" : "<small>السعر على واتساب</small>"}</div>
+        <div class="price">${p.was ? `<s class="was">${fmt(p.was)}</s>` : ""}${p.price ? (p.priceMax ? "<small>من</small> " + fmt(p.price) + "–" + fmt(p.priceMax) : fmt(p.price)) + "<small>ج.م</small>" : "<small>السعر على واتساب</small>"}</div>
         <a class="part-buy" target="_blank" rel="noopener" aria-label="اطلب ${esc(p.name)} على واتساب" href="${wa(`السلام عليكم، عايز قطعة غيار كود ${p.code} — ${p.name}`)}">${WA_ICON}<span>${p.status === "out" ? "اسأل" : "اطلب"}</span></a>
       </div>`;
     el.appendChild(body);
