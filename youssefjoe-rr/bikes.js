@@ -82,8 +82,6 @@ const BIKES = [
   { code: 66, brand: "Honda", model: "Hornet 600", year: 2006, type: "naked", cc: 600, km: "60,000", location: "بشتيل", license: "3 سنين — مرور الزمالك", price: 200, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["فرد كاوتش جديد", "وش الزيت فقط", "كتينة أوريجنال جديدة", "راشة تغيير لون", "كل الصيانة معمولة"] },
 
-  { code: 67, brand: "Honda", model: "CBR900RR Fireblade (919)", year: 1998, type: "sport", cc: 900, km: "—", location: "الزاوية الحمراء", license: "سنتين ونص", price: 135, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
-    features: ["ستاندر ياباني أصلي", "مش راشة حاجة", "مرايات وإشارات تعديل", "كاوتشات جديدة قدام وورا"] },
 
   { code: 69, brand: "Suzuki", model: "Hayabusa GSX1300R", year: 2014, type: "sport", cc: 1300, km: "29,000", location: "الشيخ زايد", license: "رخصة سنتين — إفراج اليابان", price: 660, sale: { off: 60, until: "2026-11-24T21:59:00Z" }, status: "available",
     features: ["Pearl Mira Red — Gen 2", "Full ABS Brembo", "Brembo levers & masters", "مساعد خلفي Öhlins", "Full titanium exhaust", "مرايات وغطاء جنزير كاربون", "Hydraulic steering damper", "حالة نادرة جدًا"] },
