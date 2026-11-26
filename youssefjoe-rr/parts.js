@@ -88,7 +88,7 @@ const PARTS = [
   const WA_ICON = `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>`;
 
   // عرض على قسم كامل لفترة محدودة — بيتلغي لوحده لما الوقت يخلص
-  const CAT_SALE = { cat: "سيفتي", pct: 10, until: "2026-11-26T21:59:00Z" };
+  const CAT_SALE = { cat: "سيفتي", pct: 10, until: "2000-01-01T00:00:00Z" };
   const saleOn = Date.now() < Date.parse(CAT_SALE.until);
   const parts = PARTS.filter((p) => p && p.name).map((p) => {
     const q = { ...p, _bike: bikeOf(p), _hay: norm([p.code, p.name, p.category, p.fits, p.location, p.notes].join(" ")) };
