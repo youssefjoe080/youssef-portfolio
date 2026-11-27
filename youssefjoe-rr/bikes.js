@@ -58,8 +58,8 @@ const BIKES = [
   { code: 44, brand: "Kawasaki", model: "Z1000", year: 2018, type: "naked", cc: 1000, km: "20,000", location: "المعتمدية", license: "سنتين ونص — مرور العجوزة", price: 760, status: "available",
     features: ["أول مالك من الإفراج", "الموتور ما اتحلش مسمار", "علبتين تعديل", "فردتين كاوتش جداد", "طقم آلات جر جديد"] },
 
-  { code: 45, brand: "Honda", model: "Hornet 600 ABS", year: 2008, type: "naked", cc: 600, km: "49,000", location: "المنصورة", license: "سنة و5 شهور — مرور القاهرة", price: 260, sale: { off: 30, until: "2026-11-26T21:59:00Z" }, status: "available",
-    features: ["شكمان Akrapovic", "راك + إسكرينة", "Belly Pan + Tank Side Covers + Rear Hugger", "مرايات وحامل موبايل JDR", "فردتين جداد", "وشين صيانة فقط — الموتور سليم"] },
+  { code: 45, brand: "Honda", model: "Hornet 600 ABS", year: 2008, type: "naked", cc: 600, km: "49,000", location: "المنصورة", license: "سنة و5 شهور — مرور القاهرة", price: 240, status: "available",
+    features: ["السعر فيه تفاوض", "شكمان Akrapovic", "راك + إسكرينة", "Belly Pan + Tank Side Covers + Rear Hugger", "مرايات وحامل موبايل JDR", "فردتين جداد", "وشين صيانة فقط — الموتور سليم"] },
 
   { code: 47, brand: "Honda", model: "Hornet 600", year: 2004, type: "naked", cc: 600, km: "60,000", location: "بنها", license: "حتى آخر 2027 — مرور المنوفية", price: 160, sale: { off: 5, until: "2026-10-28T18:09:16Z" }, status: "available",
     features: ["طنابير أمامي تعديل", "علبة SC Project", "كلبرات فرامل تعديل", "كاوتش أمامي 80% / خلفي 70%", "رش ديل + ملحوظة بسيطة في التنك"] },
